@@ -10,8 +10,8 @@
 
 ### Usuários
 
-- [ ] Deve ser capaz de criar uma nova task;
-- [ ] Deve ser capaz de listar todas as tasks;
+- [x] Deve ser capaz de criar uma nova task;
+- [x] Deve ser capaz de listar todas as tasks;
 - [ ] Deve ser capaz de atualizar uma task pelo id;
 - [ ] Deve ser capaz de deletar uma task pelo id;
 - [ ] Deve ser capaz de marcar uma task como completa pelo id;
