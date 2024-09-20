@@ -21,6 +21,10 @@ export const routes = [
     handler: (req, res) => {
       const { title, description } = req.body
 
+      if (!title || !description) {
+        return res.writeHead(500).end(JSON.stringify({ message: 'Envie os campos title e description.'}))
+      }
+      
       const task = {
         id: randomUUID(),
         title,
@@ -42,6 +46,14 @@ export const routes = [
       const { id } = req.params
       const { title, description } = req.body
 
+      if (!title || !description) {
+        return res.writeHead(500).end(JSON.stringify({ message: 'Envie os campos title e description.'}))
+      }
+
+      if(!database.existsIdInTable('tasks', id)) {
+        return res.writeHead(404).end(JSON.stringify({ message: 'Id não encontrado.'}))
+      }
+
       database.update('tasks', id, { title, description, updated_at: new Date()})
       
       return res.writeHead(204).end()
@@ -53,7 +65,26 @@ export const routes = [
     handler: (req, res) => {
       const { id } = req.params
 
+      if(!database.existsIdInTable('tasks', id)) {
+        return res.writeHead(404).end(JSON.stringify({ message: 'Id não encontrado.'}))
+      }
+
       database.delete('tasks', id)
+      
+      return res.writeHead(204).end()
+    }
+  },
+  {
+    method: 'PATCH',
+    path: buildRoutePath('/tasks/:id/complete'),
+    handler: (req, res) => {
+      const { id } = req.params
+
+      if(!database.existsIdInTable('tasks', id)) {
+        return res.writeHead(404).end(JSON.stringify({ message: 'Id não encontrado.'}))
+      }
+
+      database.update('tasks', id, { completed_at: new Date(), updated_at: new Date() })
       
       return res.writeHead(204).end()
     }
