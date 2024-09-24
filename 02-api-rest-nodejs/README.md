@@ -11,6 +11,8 @@
 - Eslint
 - Knex
 - Sqlite3
+- Dotenv
+- Zod
 
 ## Features
 

@@ -1,10 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { env } from '@/env'
 import { Knex } from 'knex'
 
 export default {
   client: 'sqlite3',
   connection: {
-    filename: './src/database/database.db',
+    filename: env.DATABASE_URL,
   },
   pool: {
     afterCreate: (connection: any, done: any) => {
