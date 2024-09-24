@@ -8,7 +8,7 @@
 - Typescript
 - Fastify
 - Tsx
-- 
+- Eslint
 
 ## Features
 
