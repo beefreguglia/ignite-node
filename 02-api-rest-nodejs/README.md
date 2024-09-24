@@ -9,6 +9,8 @@
 - Fastify
 - Tsx
 - Eslint
+- Knex
+- Sqlite3
 
 ## Features
 
