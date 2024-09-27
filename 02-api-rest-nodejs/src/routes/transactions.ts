@@ -1,7 +1,7 @@
 import { FastifyInstance } from 'fastify'
 
-import { checkSessionIdExists } from '@/middlewares/check-session-id-exists'
-import { TransactionController } from '@/controllers/transactionsController'
+import { checkSessionIdExists } from '../middlewares/check-session-id-exists'
+import { TransactionController } from '../controllers/transactionsController'
 
 const transactionController = new TransactionController()
 

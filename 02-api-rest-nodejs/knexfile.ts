@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { env } from '@/env'
+import { env } from './src/env'
 import { Knex } from 'knex'
 
 export default {
