@@ -29,6 +29,9 @@
 - [x] Deve ser possível identificar o usuário entre as requisições;
 - [x] O usuário só pode visualizar transações o qual ele criou; 
 
-## Requisitos não funcionais
+## Testes e2e
 
-## Testes
+- [x] Deve ser possível criar uma nova transação; 
+- [x] Deve ser possível listar todas as transações;
+- [x] Deve ser possível listar uma transação específica;
+- [x] Deve ser possível listar o resumo das transações;
