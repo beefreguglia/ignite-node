@@ -1,4 +1,4 @@
-import { knex } from '../database/knex'
+import { knex } from '../../database/knex'
 import { randomUUID } from 'crypto'
 import { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'

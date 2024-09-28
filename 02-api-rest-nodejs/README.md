@@ -15,6 +15,7 @@
 - Zod
 - Vitest
 - Supertest
+- Tsup
 
 ## Requisitos funcionais
 
