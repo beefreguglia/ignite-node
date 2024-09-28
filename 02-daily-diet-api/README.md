@@ -20,7 +20,6 @@
 ## Requisitos funcionais
 
 - [ ] Deve ser possível criar um usuário;
-- [ ] Deve ser possível identificar o usuário entre as requisições
 - [ ] Deve ser possível registrar uma refeição feita, com as seguintes informações
   - Nome
   - Descrição
@@ -35,10 +34,12 @@
   - Quantidade total de refeições dentro da dieta
   - Quantidade total de refeições fora da dieta
   - Melhor sequência de refeições dentro da dieta
-- [ ] O usuário só pode visualizar, editar e apagar as refeições o qual ele criou
 
 ## Regras de negócio
 
+- [ ] Deve ser possível identificar o usuário entre as requisições
+- [ ] As refeições devem ser relacionadas a um usuário.
+- [ ] O usuário só pode visualizar, editar e apagar as refeições o qual ele criou
 
 ## Testes e2e
 
