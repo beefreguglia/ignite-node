@@ -16,6 +16,26 @@ export class MealsController {
     return { meals }
   }
 
+  async show(request: FastifyRequest) {
+    const { id } = z
+      .object({
+        id: z.string(),
+      })
+      .parse(request.params)
+
+    const { sessionId } = request.cookies
+
+    const meal = await knex('meals')
+      .select()
+      .where({
+        session_id: sessionId,
+        id,
+      })
+      .first()
+
+    return { meal }
+  }
+
   async create(request: FastifyRequest, reply: FastifyReply) {
     const createMealBodySchema = z.object({
       name: z.string(),
@@ -28,7 +48,7 @@ export class MealsController {
       request.body,
     )
 
-    let sessionId = request.cookies.session_id
+    let { sessionId } = request.cookies
 
     if (!sessionId) {
       sessionId = randomUUID()
