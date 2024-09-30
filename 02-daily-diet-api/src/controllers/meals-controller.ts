@@ -4,13 +4,18 @@ import { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
 
 import { knex } from '../../database/knex'
+import { AppError } from '../utils/app-error'
 
 export class MealsController {
   async index(request: FastifyRequest, reply: FastifyReply) {
-    const { sessionId } = request.cookies
+    const userId = request.user?.id
 
-    const meals = await knex('meals').select().where({
-      session_id: sessionId,
+    if (!userId) {
+      throw new AppError('User id not found.', 404)
+    }
+
+    const meals = await knex<MealsRepository>('meals').select().where({
+      user_id: userId,
     })
 
     reply.send({ meals })
@@ -23,12 +28,16 @@ export class MealsController {
       })
       .parse(request.params)
 
-    const { sessionId } = request.cookies
+    const userId = request.user?.id
 
-    const meal = await knex('meals')
+    if (!userId) {
+      throw new AppError('User id not found.', 404)
+    }
+
+    const meal = await knex<MealsRepository>('meals')
       .select()
       .where({
-        session_id: sessionId,
+        user_id: userId,
         id,
       })
       .first()
@@ -43,29 +52,23 @@ export class MealsController {
       date: z.string().optional(),
       fits_diet: z.boolean(),
     })
+    const userId = request.user?.id
+
+    if (!userId) {
+      throw new AppError('User id not found.', 404)
+    }
 
     const { name, date, description, fits_diet } = createMealBodySchema.parse(
       request.body,
     )
 
-    let { sessionId } = request.cookies
-
-    if (!sessionId) {
-      sessionId = randomUUID()
-
-      reply.setCookie('sessionId', sessionId, {
-        path: '/',
-        maxAge: 60 * 60 * 24 * 7,
-      })
-    }
-
-    await knex('meals').insert({
+    await knex<MealsRepository>('meals').insert({
       id: randomUUID(),
+      user_id: userId,
       name,
       description,
       date,
       fits_diet,
-      session_id: sessionId,
     })
 
     reply.status(201).send()
@@ -78,7 +81,22 @@ export class MealsController {
       })
       .parse(request.params)
 
-    const { sessionId } = request.cookies
+    const userId = request.user?.id
+
+    if (!userId) {
+      throw new AppError('User id not found.', 404)
+    }
+
+    const meal = await knex<MealsRepository>('meals')
+      .where({
+        user_id: userId,
+        id,
+      })
+      .first()
+
+    if (!meal) {
+      throw new AppError('Meal not exists')
+    }
 
     const createMealBodySchema = z.object({
       name: z.string(),
@@ -91,16 +109,17 @@ export class MealsController {
       request.body,
     )
 
-    await knex('meals')
+    await knex<MealsRepository>('meals')
       .update({
         name,
         description,
         date,
         fits_diet,
+        updated_at: knex.fn.now(),
       })
       .where({
+        user_id: userId,
         id,
-        session_id: sessionId,
       })
 
     reply.status(204).send()
@@ -113,13 +132,27 @@ export class MealsController {
       })
       .parse(request.params)
 
-    console.log(id)
-    const { sessionId } = request.cookies
+    const userId = request.user?.id
 
-    await knex('meals')
+    if (!userId) {
+      throw new AppError('User id not found.', 404)
+    }
+
+    const meal = await knex<MealsRepository>('meals')
+      .where({
+        user_id: userId,
+        id,
+      })
+      .first()
+
+    if (!meal) {
+      throw new AppError('Meal not exists')
+    }
+
+    await knex<MealsRepository>('meals')
       .where({
         id,
-        session_id: sessionId,
+        user_id: userId,
       })
       .delete()
 

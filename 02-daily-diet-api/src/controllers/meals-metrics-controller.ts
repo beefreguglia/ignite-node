@@ -1,23 +1,28 @@
 import { FastifyReply, FastifyRequest } from 'fastify'
 import { knex } from '../../database/knex'
+import { AppError } from '../utils/app-error'
 
 export class MealsMetricsController {
   async index(request: FastifyRequest, reply: FastifyReply) {
-    const { sessionId } = request.cookies
+    const userId = request.user?.id
+
+    if (!userId) {
+      throw new AppError('User id not found.', 404)
+    }
 
     const totalMealsOutsideDiet = await knex('meals')
       .count('id', { as: 'total' })
-      .where({ session_id: sessionId, fits_diet: false })
+      .where({ user_id: userId, fits_diet: false })
       .first()
 
     const totalMealsInsideDiet = await knex<MealsRepository>('meals')
       .count('id', { as: 'total' })
-      .where({ session_id: sessionId, fits_diet: true })
+      .where({ user_id: userId, fits_diet: true })
       .first()
 
     const totalMeals = await knex<MealsRepository>('meals')
       .where({
-        session_id: sessionId,
+        user_id: userId,
       })
       .orderBy('date', 'desc')
 

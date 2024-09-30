@@ -1,4 +1,5 @@
 import { FastifyInstance } from 'fastify'
+
 import { MealsController } from '../controllers/meals-controller'
 import { checkSessionIdExists } from '../middlewares/check-session-id-exists'
 import { MealsMetricsController } from '../controllers/meals-metrics-controller'
@@ -14,11 +15,15 @@ export async function mealsRoute(app: FastifyInstance) {
     { preHandler: [checkSessionIdExists] },
     mealsController.update,
   )
-  app.post('/', mealsController.create)
+  app.post('/', { preHandler: [checkSessionIdExists] }, mealsController.create)
   app.delete(
     '/:id',
     { preHandler: [checkSessionIdExists] },
     mealsController.delete,
   )
-  app.get('/metrics', mealsMetricsController.index)
+  app.get(
+    '/metrics',
+    { preHandler: [checkSessionIdExists] },
+    mealsMetricsController.index,
+  )
 }
