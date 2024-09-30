@@ -6,17 +6,17 @@ import { z } from 'zod'
 import { knex } from '../../database/knex'
 
 export class MealsController {
-  async index(request: FastifyRequest) {
+  async index(request: FastifyRequest, reply: FastifyReply) {
     const { sessionId } = request.cookies
 
     const meals = await knex('meals').select().where({
       session_id: sessionId,
     })
 
-    return { meals }
+    reply.send({ meals })
   }
 
-  async show(request: FastifyRequest) {
+  async show(request: FastifyRequest, reply: FastifyReply) {
     const { id } = z
       .object({
         id: z.string(),
@@ -33,7 +33,7 @@ export class MealsController {
       })
       .first()
 
-    return { meal }
+    reply.send({ meal })
   }
 
   async create(request: FastifyRequest, reply: FastifyReply) {
@@ -68,10 +68,10 @@ export class MealsController {
       session_id: sessionId,
     })
 
-    reply.status(201)
+    reply.status(201).send()
   }
 
-  async update(request: FastifyRequest) {
+  async update(request: FastifyRequest, reply: FastifyReply) {
     const { id } = z
       .object({
         id: z.string(),
@@ -102,9 +102,11 @@ export class MealsController {
         id,
         session_id: sessionId,
       })
+
+    reply.status(204).send()
   }
 
-  async delete(request: FastifyRequest) {
+  async delete(request: FastifyRequest, reply: FastifyReply) {
     const { id } = z
       .object({
         id: z.string(),
@@ -120,5 +122,7 @@ export class MealsController {
         session_id: sessionId,
       })
       .delete()
+
+    reply.status(204).send()
   }
 }

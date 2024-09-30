@@ -1,8 +1,10 @@
 import { FastifyInstance } from 'fastify'
 import { MealsController } from '../controllers/meals-controller'
 import { checkSessionIdExists } from '../middlewares/check-session-id-exists'
+import { MealsMetricsController } from '../controllers/meals-metrics-controller'
 
 const mealsController = new MealsController()
+const mealsMetricsController = new MealsMetricsController()
 
 export async function mealsRoute(app: FastifyInstance) {
   app.get('/', { preHandler: [checkSessionIdExists] }, mealsController.index)
@@ -18,4 +20,5 @@ export async function mealsRoute(app: FastifyInstance) {
     { preHandler: [checkSessionIdExists] },
     mealsController.delete,
   )
+  app.get('/metrics', mealsMetricsController.index)
 }
