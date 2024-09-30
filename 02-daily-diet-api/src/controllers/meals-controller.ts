@@ -78,6 +78,8 @@ export class MealsController {
       })
       .parse(request.params)
 
+    const { sessionId } = request.cookies
+
     const createMealBodySchema = z.object({
       name: z.string(),
       description: z.string(),
@@ -98,6 +100,25 @@ export class MealsController {
       })
       .where({
         id,
+        session_id: sessionId,
       })
+  }
+
+  async delete(request: FastifyRequest) {
+    const { id } = z
+      .object({
+        id: z.string(),
+      })
+      .parse(request.params)
+
+    console.log(id)
+    const { sessionId } = request.cookies
+
+    await knex('meals')
+      .where({
+        id,
+        session_id: sessionId,
+      })
+      .delete()
   }
 }

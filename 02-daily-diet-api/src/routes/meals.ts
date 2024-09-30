@@ -13,4 +13,9 @@ export async function mealsRoute(app: FastifyInstance) {
     mealsController.update,
   )
   app.post('/', mealsController.create)
+  app.delete(
+    '/:id',
+    { preHandler: [checkSessionIdExists] },
+    mealsController.delete,
+  )
 }
