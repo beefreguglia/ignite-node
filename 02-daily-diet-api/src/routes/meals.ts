@@ -7,5 +7,10 @@ const mealsController = new MealsController()
 export async function mealsRoute(app: FastifyInstance) {
   app.get('/', { preHandler: [checkSessionIdExists] }, mealsController.index)
   app.get('/:id', { preHandler: [checkSessionIdExists] }, mealsController.show)
+  app.put(
+    '/:id',
+    { preHandler: [checkSessionIdExists] },
+    mealsController.update,
+  )
   app.post('/', mealsController.create)
 }

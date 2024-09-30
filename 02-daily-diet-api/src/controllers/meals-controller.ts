@@ -67,5 +67,37 @@ export class MealsController {
       fits_diet,
       session_id: sessionId,
     })
+
+    reply.status(201)
+  }
+
+  async update(request: FastifyRequest) {
+    const { id } = z
+      .object({
+        id: z.string(),
+      })
+      .parse(request.params)
+
+    const createMealBodySchema = z.object({
+      name: z.string(),
+      description: z.string(),
+      date: z.string().optional(),
+      fits_diet: z.boolean(),
+    })
+
+    const { name, date, description, fits_diet } = createMealBodySchema.parse(
+      request.body,
+    )
+
+    await knex('meals')
+      .update({
+        name,
+        description,
+        date,
+        fits_diet,
+      })
+      .where({
+        id,
+      })
   }
 }
