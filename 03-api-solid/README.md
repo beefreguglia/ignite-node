@@ -9,6 +9,8 @@
 - Tsx
 - Tsup
 - Fastify
+- Dotenv
+- Zod
 
 ## Requisitos funcionais
 
