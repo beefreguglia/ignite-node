@@ -11,6 +11,8 @@
 - Fastify
 - Dotenv
 - Zod
+- Eslint
+- @Rocketseat/eslint-config
 
 ## Requisitos funcionais
 
