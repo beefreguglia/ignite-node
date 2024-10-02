@@ -8,6 +8,7 @@ export async function up(knex: Knex): Promise<void> {
       .notNullable()
       .references('id')
       .inTable('users')
+      .onDelete('CASCADE')
       .index()
     table.text('name').notNullable()
     table.text('description').notNullable()
@@ -19,5 +20,5 @@ export async function up(knex: Knex): Promise<void> {
 }
 
 export async function down(knex: Knex): Promise<void> {
-  await knex.schema.dropTable('meals')
+  await knex.schema.dropTableIfExists('meals')
 }
