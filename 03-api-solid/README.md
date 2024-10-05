@@ -12,7 +12,10 @@
 - Dotenv
 - Zod
 - Eslint
-- @Rocketseat/eslint-config
+- @rocketseat/eslint-config
+- Prisma
+- Docker
+- Postgres
 
 ## Requisitos funcionais
 
