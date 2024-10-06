@@ -16,6 +16,7 @@
 - Prisma
 - Docker
 - Postgres
+- Vitest
 
 ## Requisitos funcionais
 
