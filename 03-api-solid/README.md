@@ -21,7 +21,7 @@
 ## Requisitos funcionais
 
 - [x] Deve ser possível se cadastrar;
-- [ ] Deve ser possível se autenticar;
+- [x] Deve ser possível se autenticar;
 - [ ] Deve ser possível obter o perfil de um usuário logado;
 - [ ] Deve ser possível o número de check-ins realizados pelo usuário logado;
 - [ ] Deve ser possível o usuário obter seu histórico de check-ins;
@@ -43,6 +43,6 @@
 ## Regras não-funcionais
 
 - [x] A senha do usuário precisa estar criptografada;
-- [ ] Os dados da aplicação precisam estar persistidos em um banco PostgresSQL;
+- [x] Os dados da aplicação precisam estar persistidos em um banco PostgresSQL;
 - [ ] Todas listas de dados precisam estar paginadas com 20 itens por página;
 - [ ] o usuário deve ser identificado por um JWT (JSON Web Token) ;
