@@ -7,7 +7,7 @@ import { InvalidCredentialsError } from './errors/user-already-exists-error'
 let usersRepository: InMemoryUsersRepository
 let sut: AuthenticateUseCase
 
-describe('Authenticate user case', () => {
+describe('Authenticate use case', () => {
   beforeEach(() => {
     usersRepository = new InMemoryUsersRepository()
     sut = new AuthenticateUseCase(usersRepository)
