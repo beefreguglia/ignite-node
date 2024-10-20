@@ -13,7 +13,7 @@ describe('Register use case', () => {
     sut = new RegisterUseCase(usersRepository)
   })
 
-  it('should to register', async () => {
+  it('should be able to register', async () => {
     const email = 'johndoe@example.com'
     const password = '123456'
     const name = 'John Doe'
