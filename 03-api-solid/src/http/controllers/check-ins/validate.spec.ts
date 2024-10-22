@@ -18,11 +18,15 @@ describe('Validate check-in (e2e)', () => {
     const email = 'johndoe@example.com'
     const password = '123456'
 
-    const { accessToken } = await createAndAuthenticateUser(app, {
-      email,
-      name,
-      password,
-    })
+    const { accessToken } = await createAndAuthenticateUser(
+      app,
+      {
+        email,
+        name,
+        password,
+      },
+      true,
+    )
 
     const title = 'Javascript Gym'
     const description = 'Some description'
