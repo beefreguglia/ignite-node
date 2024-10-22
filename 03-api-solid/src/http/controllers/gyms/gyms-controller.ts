@@ -1,10 +1,9 @@
 import { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
 
-import { InvalidCredentialsError } from '@/use-cases/errors/user-already-exists-error'
-import { makeAuthenticateUseCase } from '@/use-cases/factories/make-authenticate-use-case'
-import { makeGetUserProfileUseCase } from '@/use-cases/factories/make-get-user-profile'
 import { makeCreateGymUseCase } from '@/use-cases/factories/make-create-gym-use-case'
+import { makeSearchGymsUseCase } from '@/use-cases/factories/make-search-gyms'
+import { makeFetchNearbyGymsUseCase } from '@/use-cases/factories/make-fetch-nearby-gyms'
 
 export class GymsController {
   async create(request: FastifyRequest, reply: FastifyReply) {
@@ -32,49 +31,38 @@ export class GymsController {
     return reply.status(201).send()
   }
 
-  async authenticate(request: FastifyRequest, reply: FastifyReply) {
-    const authenticateBodySchema = z.object({
-      email: z.string().email(),
-      password: z.string().min(6),
+  async search(request: FastifyRequest, reply: FastifyReply) {
+    const searchGymsQuerySchema = z.object({
+      q: z.string(),
+      page: z.coerce.number().min(1).default(1),
     })
 
-    const { email, password } = authenticateBodySchema.parse(request.body)
+    const { q, page } = searchGymsQuerySchema.parse(request.query)
 
-    try {
-      const authenticateUseCase = makeAuthenticateUseCase()
+    const searchGymsUseCase = makeSearchGymsUseCase()
 
-      const { user } = await authenticateUseCase.execute({ email, password })
+    const { gyms } = await searchGymsUseCase.execute({ query: q, page })
 
-      const token = await reply.jwtSign(
-        {},
-        {
-          sign: {
-            sub: user.id,
-          },
-        },
-      )
-
-      return reply.status(200).send({ token })
-    } catch (err) {
-      if (err instanceof InvalidCredentialsError) {
-        return reply.status(400).send({ message: err.message })
-      }
-      throw err
-    }
+    return reply.status(200).send({ gyms })
   }
 
-  async profile(request: FastifyRequest, reply: FastifyReply) {
-    const getUserProfile = makeGetUserProfileUseCase()
+  async nearby(request: FastifyRequest, reply: FastifyReply) {
+    const nearbyGymsQuerySchema = z.object({
+      latitude: z.number().refine((value) => Math.abs(value) <= 90),
+      longitude: z.number().refine((value) => Math.abs(value) <= 180),
+    })
 
-    const { user } = await getUserProfile.execute({
-      userId: request.user.sub,
+    const { latitude, longitude } = nearbyGymsQuerySchema.parse(request.query)
+
+    const fetchNearbyGyms = makeFetchNearbyGymsUseCase()
+
+    const { gyms } = await fetchNearbyGyms.execute({
+      userLatitude: latitude,
+      userLongitude: longitude,
     })
 
     return reply.status(200).send({
-      user: {
-        ...user,
-        password_hash: undefined,
-      },
+      gyms,
     })
   }
 }
