@@ -3,7 +3,7 @@ import request from 'supertest'
 import { app } from '@/app'
 import { createAndAuthenticateUser } from '@/utils/tests/create-and-authenticate-user'
 
-describe('Search gym (e2e)', () => {
+describe('Search nearby gyms (e2e)', () => {
   beforeAll(async () => {
     await app.ready()
   })
@@ -12,7 +12,7 @@ describe('Search gym (e2e)', () => {
     await app.close()
   })
 
-  it('should be able to search gym by title', async () => {
+  it('should be able to list nearby gyms', async () => {
     const name = 'John Doe'
     const email = 'johndoe@example.com'
     const password = '123456'
@@ -26,8 +26,6 @@ describe('Search gym (e2e)', () => {
     const title = 'Javascript Gym'
     const description = 'Some description'
     const phone = '11999999999'
-    const latitude = -20.3992387
-    const longitude = -43.5105982
 
     await request(app.server)
       .post('/gyms')
@@ -36,8 +34,8 @@ describe('Search gym (e2e)', () => {
         title,
         description,
         phone,
-        latitude,
-        longitude,
+        latitude: -20.3992387,
+        longitude: -43.5105982,
       })
 
     await request(app.server)
@@ -47,14 +45,15 @@ describe('Search gym (e2e)', () => {
         title: 'Typescript Gym',
         description,
         phone,
-        latitude,
-        longitude,
+        latitude: -20.397591,
+        longitude: -42.9508829,
       })
 
     const response = await request(app.server)
-      .get('/gyms/search')
+      .get('/gyms/nearby')
       .query({
-        q: 'Javascript',
+        latitude: -20.3992387,
+        longitude: -43.5105982,
       })
       .set('Authorization', `Bearer ${token}`)
 
