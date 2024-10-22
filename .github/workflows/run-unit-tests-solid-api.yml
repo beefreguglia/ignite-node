@@ -17,6 +17,6 @@ jobs:
           version: 9
 
       - run: ls
-      - run: npm ci
+      - run: pnpm ci
 
-      - run: npm run test
+      - run: pnpm run test
