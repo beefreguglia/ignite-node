@@ -46,7 +46,9 @@ export class UsersController {
       const { user } = await authenticateUseCase.execute({ email, password })
 
       const accessToken = await reply.jwtSign(
-        {},
+        {
+          role: user.role,
+        },
         {
           sign: {
             sub: user.id,
@@ -55,7 +57,9 @@ export class UsersController {
       )
 
       const refreshToken = await reply.jwtSign(
-        {},
+        {
+          role: user.role,
+        },
         {
           sign: {
             sub: user.id,
@@ -100,7 +104,9 @@ export class UsersController {
     await request.jwtVerify({ onlyCookie: true })
 
     const accessToken = await reply.jwtSign(
-      {},
+      {
+        role: request.user.role,
+      },
       {
         sign: {
           sub: request.user.sub,
@@ -109,7 +115,9 @@ export class UsersController {
     )
 
     const refreshToken = await reply.jwtSign(
-      {},
+      {
+        role: request.user.role,
+      },
       {
         sign: {
           sub: request.user.sub,
