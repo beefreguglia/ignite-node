@@ -1,6 +1,6 @@
 # API estilo Gympass
 
-> Esse projeto é referente ao desenvolvimento de uma API estilo Gympass. Ele foi desenvolvido durante o curso Ignite no 3 módulo - Node.js da rocketseat.
+> Esse projeto é referente ao desenvolvimento de uma API estilo Gympass. Ele foi desenvolvido durante o curso Ignite - Node.js da rocketseat.
 
 ## 💻 Tecnologias
 
