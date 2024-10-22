@@ -5,6 +5,7 @@ import { UserAlreadyExistsError } from '@/use-cases/errors/invalid-credentials-e
 import { InvalidCredentialsError } from '@/use-cases/errors/user-already-exists-error'
 import { makeRegisterUseCase } from '@/use-cases/factories/make-register-use-case'
 import { makeAuthenticateUseCase } from '@/use-cases/factories/make-authenticate-use-case'
+import { makeGetUserProfileUseCase } from '@/use-cases/factories/make-get-user-profile'
 
 export class UsersController {
   async create(request: FastifyRequest, reply: FastifyReply) {
@@ -63,7 +64,17 @@ export class UsersController {
   }
 
   async profile(request: FastifyRequest, reply: FastifyReply) {
-    await request.jwtVerify()
-    return reply.status(200).send()
+    const getUserProfile = makeGetUserProfileUseCase()
+
+    const { user } = await getUserProfile.execute({
+      userId: request.user.sub,
+    })
+
+    return reply.status(200).send({
+      user: {
+        ...user,
+        password_hash: undefined,
+      },
+    })
   }
 }
