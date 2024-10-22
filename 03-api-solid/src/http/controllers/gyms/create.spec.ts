@@ -17,7 +17,7 @@ describe('Create gym (e2e)', () => {
     const email = 'johndoe@example.com'
     const password = '123456'
 
-    const { token } = await createAndAuthenticateUser(app, {
+    const { accessToken } = await createAndAuthenticateUser(app, {
       email,
       name,
       password,
@@ -31,7 +31,7 @@ describe('Create gym (e2e)', () => {
 
     const response = await request(app.server)
       .post('/gyms')
-      .set('Authorization', `Bearer ${token}`)
+      .set('Authorization', `Bearer ${accessToken}`)
       .send({
         title,
         description,

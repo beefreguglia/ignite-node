@@ -10,7 +10,7 @@ interface User {
 export async function createAndAuthenticateUser(
   app: FastifyInstance,
   user: User,
-): Promise<{ token: string }> {
+): Promise<{ accessToken: string }> {
   const { email, name, password } = user
   await request(app.server).post('/register').send({ name, email, password })
 
@@ -18,7 +18,7 @@ export async function createAndAuthenticateUser(
     .post('/sessions')
     .send({ email, password })
 
-  const { token } = authResponse.body
+  const { accessToken } = authResponse.body
 
-  return { token }
+  return { accessToken }
 }

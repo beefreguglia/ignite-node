@@ -17,7 +17,7 @@ describe('Profile (e2e)', () => {
     const email = 'johndoe@example.com'
     const password = '123456'
 
-    const { token } = await createAndAuthenticateUser(app, {
+    const { accessToken } = await createAndAuthenticateUser(app, {
       email,
       name,
       password,
@@ -25,7 +25,7 @@ describe('Profile (e2e)', () => {
 
     const profileResponse = await request(app.server)
       .get('/me')
-      .set('Authorization', `Bearer ${token}`)
+      .set('Authorization', `Bearer ${accessToken}`)
       .send()
 
     expect(profileResponse.statusCode).toEqual(200)

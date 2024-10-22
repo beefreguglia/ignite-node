@@ -17,7 +17,7 @@ describe('Search gym (e2e)', () => {
     const email = 'johndoe@example.com'
     const password = '123456'
 
-    const { token } = await createAndAuthenticateUser(app, {
+    const { accessToken } = await createAndAuthenticateUser(app, {
       email,
       name,
       password,
@@ -31,7 +31,7 @@ describe('Search gym (e2e)', () => {
 
     await request(app.server)
       .post('/gyms')
-      .set('Authorization', `Bearer ${token}`)
+      .set('Authorization', `Bearer ${accessToken}`)
       .send({
         title,
         description,
@@ -42,7 +42,7 @@ describe('Search gym (e2e)', () => {
 
     await request(app.server)
       .post('/gyms')
-      .set('Authorization', `Bearer ${token}`)
+      .set('Authorization', `Bearer ${accessToken}`)
       .send({
         title: 'Typescript Gym',
         description,
@@ -56,7 +56,7 @@ describe('Search gym (e2e)', () => {
       .query({
         q: 'Javascript',
       })
-      .set('Authorization', `Bearer ${token}`)
+      .set('Authorization', `Bearer ${accessToken}`)
 
     expect(response.statusCode).toEqual(200)
     expect(response.body.gyms).toHaveLength(1)

@@ -18,7 +18,7 @@ describe('Check-in history (e2e)', () => {
     const email = 'johndoe@example.com'
     const password = '123456'
 
-    const { token } = await createAndAuthenticateUser(app, {
+    const { accessToken } = await createAndAuthenticateUser(app, {
       email,
       name,
       password,
@@ -56,7 +56,7 @@ describe('Check-in history (e2e)', () => {
 
     const response = await request(app.server)
       .get('/check-ins/history')
-      .set('Authorization', `Bearer ${token}`)
+      .set('Authorization', `Bearer ${accessToken}`)
       .send()
 
     expect(response.statusCode).toEqual(200)

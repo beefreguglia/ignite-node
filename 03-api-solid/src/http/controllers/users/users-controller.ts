@@ -45,7 +45,7 @@ export class UsersController {
 
       const { user } = await authenticateUseCase.execute({ email, password })
 
-      const token = await reply.jwtSign(
+      const accessToken = await reply.jwtSign(
         {},
         {
           sign: {
@@ -54,7 +54,25 @@ export class UsersController {
         },
       )
 
-      return reply.status(200).send({ token })
+      const refreshToken = await reply.jwtSign(
+        {},
+        {
+          sign: {
+            sub: user.id,
+            expiresIn: '7d',
+          },
+        },
+      )
+
+      return reply
+        .setCookie('refreshToken', refreshToken, {
+          path: '/',
+          secure: true,
+          sameSite: true,
+          httpOnly: true,
+        })
+        .status(200)
+        .send({ accessToken })
     } catch (err) {
       if (err instanceof InvalidCredentialsError) {
         return reply.status(400).send({ message: err.message })
@@ -76,5 +94,38 @@ export class UsersController {
         password_hash: undefined,
       },
     })
+  }
+
+  async refresh(request: FastifyRequest, reply: FastifyReply) {
+    await request.jwtVerify({ onlyCookie: true })
+
+    const accessToken = await reply.jwtSign(
+      {},
+      {
+        sign: {
+          sub: request.user.sub,
+        },
+      },
+    )
+
+    const refreshToken = await reply.jwtSign(
+      {},
+      {
+        sign: {
+          sub: request.user.sub,
+          expiresIn: '7d',
+        },
+      },
+    )
+
+    return reply
+      .setCookie('refreshToken', refreshToken, {
+        path: '/',
+        secure: true,
+        sameSite: true,
+        httpOnly: true,
+      })
+      .status(200)
+      .send({ accessToken })
   }
 }
