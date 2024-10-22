@@ -16,7 +16,7 @@ jobs:
         with:
           version: 9
 
-      - run: ls
+      - run: cd 03-api-solid
       - run: pnpm install --frozen-lockfile
 
       - run: pnpm run test
