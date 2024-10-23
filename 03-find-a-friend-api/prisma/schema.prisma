@@ -1,0 +1,96 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Address {
+  id           String  @id @default(uuid())
+  street       String
+  number       Int?
+  neighborhood String
+  city         String
+  state        String
+  complement   String?
+  latitude     Decimal
+  longitude    Decimal
+
+  organization Organization?
+
+  @@map("addresses")
+}
+
+model Organization {
+  id         String   @id @default(uuid())
+  name       String
+  owner_name String
+  phone      String?
+  email      String   @unique
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  Address   Address @relation(fields: [addressId], references: [id])
+  addressId String  @unique @map("address_id")
+
+  Pet Pet[]
+
+  @@map("organizations")
+}
+
+enum EnergyLevel {
+  VERY_LOW
+  LOW
+  MEDIUM
+  HIGH
+  VERY_HIGH
+}
+
+enum Size {
+  SMALL
+  MEDIUM
+  LARGE
+}
+
+enum Space {
+  SMALL
+  MEDIUM
+  HIGH
+}
+
+enum Depends {
+  SMALL
+  MEDIUM
+  HIGH
+}
+
+model Pet {
+  id           String      @id @default(uuid())
+  name         String
+  description  String
+  age          Int
+  image        String
+  size         Size
+  energy_level EnergyLevel
+  space        Space
+  depends      Depends
+
+  organization   Organization @relation(fields: [organizationId], references: [id])
+  organizationId String       @map("organization_id")
+
+  requiriments Requirement[]
+
+  @@map("pets")
+}
+
+model Requirement {
+  id          String @id @default(uuid())
+  description String
+
+  Pet   Pet?    @relation(fields: [petId], references: [id])
+  petId String? @map("pet_id")
+
+  @@map("requirements")
+}
