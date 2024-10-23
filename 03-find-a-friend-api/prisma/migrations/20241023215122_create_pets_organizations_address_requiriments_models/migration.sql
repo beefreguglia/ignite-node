@@ -33,7 +33,7 @@ CREATE TABLE "organizations" (
     "phone" TEXT,
     "email" TEXT NOT NULL,
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updated_at" TIMESTAMP(3) NOT NULL,
+    "updated_at" TIMESTAMP(3),
     "address_id" TEXT NOT NULL,
 
     CONSTRAINT "organizations_pkey" PRIMARY KEY ("id")

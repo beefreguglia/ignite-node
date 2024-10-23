@@ -24,13 +24,13 @@ model Address {
 }
 
 model Organization {
-  id         String   @id @default(uuid())
+  id         String    @id @default(uuid())
   name       String
   owner_name String
   phone      String?
-  email      String   @unique
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
+  email      String    @unique
+  created_at DateTime  @default(now())
+  updated_at DateTime? @updatedAt
 
   Address   Address @relation(fields: [addressId], references: [id])
   addressId String  @unique @map("address_id")
