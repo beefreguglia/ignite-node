@@ -6,6 +6,16 @@ import { AddressRepository } from '../address-repository'
 export class InMemoryAddressRepository implements AddressRepository {
   public addresses: Address[] = []
 
+  async getById(id: string): Promise<Address | null> {
+    const address = this.addresses.find((address) => address.id === id)
+
+    if (!address) {
+      return null
+    }
+
+    return address
+  }
+
   async create(data: Prisma.AddressCreateInput): Promise<Address> {
     const address: Address = {
       id: randomUUID(),

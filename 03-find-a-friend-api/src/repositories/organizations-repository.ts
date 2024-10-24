@@ -9,8 +9,10 @@ export interface CreateProps {
   created_at?: Date | string
   updated_at?: Date | string | null
   address_id: string
+  password: string
 }
 
 export interface OrganizationsRepository {
   create(data: CreateProps): Promise<Organization>
+  findByEmail(email: string): Promise<Organization | null>
 }

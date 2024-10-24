@@ -31,6 +31,7 @@ model Organization {
   email      String    @unique
   created_at DateTime  @default(now())
   updated_at DateTime? @updatedAt
+  password   String
 
   Address   Address @relation(fields: [addressId], references: [id])
   addressId String  @unique @map("address_id")

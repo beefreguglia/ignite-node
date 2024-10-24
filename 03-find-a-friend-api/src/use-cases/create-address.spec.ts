@@ -5,7 +5,7 @@ import { beforeEach, describe, expect, it } from 'vitest'
 let addressRepository: InMemoryAddressRepository
 let sut: CreateAddressUseCase
 
-describe('Create organization use case', () => {
+describe('Create address use case', () => {
   beforeEach(() => {
     addressRepository = new InMemoryAddressRepository()
     sut = new CreateAddressUseCase(addressRepository)
