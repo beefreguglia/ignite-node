@@ -6,7 +6,7 @@ import { OrganizationAlreadyExistsError } from './errors/organization-already-ex
 interface CreateOrganizationUseCaseRequest {
   name: string
   owner_name: string
-  phone?: string | null
+  phone: string
   email: string
   password: string
   street: string
@@ -15,6 +15,7 @@ interface CreateOrganizationUseCaseRequest {
   city: string
   state: string
   neighborhood: string
+  cep: string
 }
 
 interface CreateOrganizationUseCaseResponse {
@@ -36,6 +37,7 @@ export class CreateOrganizationUseCase {
     street,
     complement,
     number,
+    cep,
   }: CreateOrganizationUseCaseRequest): Promise<CreateOrganizationUseCaseResponse> {
     const password_hash = await hash(password, 6)
 
@@ -58,6 +60,7 @@ export class CreateOrganizationUseCase {
       street,
       complement,
       number,
+      cep,
     })
 
     return { organization }

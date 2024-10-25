@@ -4,7 +4,6 @@ import { randomUUID } from 'node:crypto'
 type Overwrite = {
   email?: string
   password?: string
-  phone?: string
   city?: string
   complement?: string
 }
@@ -12,8 +11,8 @@ type Overwrite = {
 export function makeOrganization(overwrite?: Overwrite) {
   return {
     id: randomUUID(),
-
     email: overwrite?.email ?? faker.internet.email(),
+    cep: faker.location.zipCode(),
     password: overwrite?.password ?? faker.internet.password(),
     name: faker.company.name(),
     phone: faker.phone.number(),

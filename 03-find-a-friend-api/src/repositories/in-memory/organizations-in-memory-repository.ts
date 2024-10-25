@@ -26,7 +26,7 @@ export class InMemoryOrganizationsRepository
       email: data.email,
       password: data.password,
       name: data.name,
-      phone: data.phone ?? null,
+      phone: data.phone,
       owner_name: data.owner_name,
       city: data.city,
       complement: data.complement ?? null,
@@ -34,6 +34,7 @@ export class InMemoryOrganizationsRepository
       number: data.number ?? null,
       state: data.state,
       street: data.street,
+      cep: data.cep,
       created_at: new Date(),
       updated_at: null,
     }

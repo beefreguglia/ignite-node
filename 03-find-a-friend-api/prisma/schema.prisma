@@ -12,11 +12,12 @@ model Organization {
 
   name       String
   owner_name String
-  phone      String?
+  phone      String
 
   email    String @unique
   password String
 
+  cep          String
   street       String
   number       Int?
   neighborhood String
