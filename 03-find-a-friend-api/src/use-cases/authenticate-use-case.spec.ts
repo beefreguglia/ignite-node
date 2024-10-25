@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it } from 'vitest'
 import { InMemoryOrganizationsRepository } from '@/repositories/in-memory/organizations-in-memory-repository'
-import { AuthenticateUseCase } from './authenticate'
+import { AuthenticateUseCase } from './authenticate-use-case'
 import { InvalidCredentialsError } from './errors/invalid-credentials-error'
 import { makeOrganization } from 'tests/factory/make-org'
 import { hash } from 'bcryptjs'

@@ -2,7 +2,7 @@ import { describe, beforeEach, it, expect } from 'vitest'
 
 import { InMemoryOrganizationsRepository } from '@/repositories/in-memory/organizations-in-memory-repository'
 import { InMemoryPetsRepository } from '@/repositories/in-memory/pets-in-memory-repository'
-import { FetchPetsByCityUseCase } from './fetch-pets-by-city'
+import { FetchPetsByCityUseCase } from './fetch-pets-by-city-use-case'
 import { makePet } from 'tests/factory/make-pet'
 import { makeOrganization } from 'tests/factory/make-org'
 

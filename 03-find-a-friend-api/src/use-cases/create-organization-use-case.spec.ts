@@ -1,8 +1,8 @@
 import { beforeEach, describe, expect, it } from 'vitest'
-import { CreateOrganizationUseCase } from './create-organization'
+import { CreateOrganizationUseCase } from './create-organization-use-case'
 import { InMemoryOrganizationsRepository } from '@/repositories/in-memory/organizations-in-memory-repository'
-import { InvalidCredentialsError } from './errors/invalid-credentials-error'
 import { makeOrganization } from 'tests/factory/make-org'
+import { OrganizationAlreadyExistsError } from './errors/organization-already-exists-error'
 
 let organizationRepository: InMemoryOrganizationsRepository
 let sut: CreateOrganizationUseCase
@@ -32,6 +32,6 @@ describe('Create organization use case', () => {
 
     await expect(() =>
       sut.execute(makeOrganization({ email: 'example@example.com' })),
-    ).rejects.toBeInstanceOf(InvalidCredentialsError)
+    ).rejects.toBeInstanceOf(OrganizationAlreadyExistsError)
   })
 })
