@@ -1,4 +1,4 @@
-import { Prisma, Pet } from '@prisma/client'
+import { Prisma, Pet, Environment } from '@prisma/client'
 import { randomUUID } from 'node:crypto'
 
 import { FindAllParams, PetsRepository } from '../pets-repository'
@@ -21,9 +21,10 @@ export class InMemoryPetsRepository implements PetsRepository {
       .filter((pet) =>
         params.energy_level ? pet.energy_level === params.energy_level : true,
       )
-      .filter((pet) =>
-        params.environment ? pet.environment === params.environment : true,
-      )
+      .filter((pet) => {
+        const env = params.environment as Environment | undefined
+        return params.environment ? pet.environment === env : true
+      })
 
     return pets
   }
