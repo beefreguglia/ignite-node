@@ -127,7 +127,6 @@ describe('Fetch Pets by city Use Case', () => {
       environment: 'MEDIUM',
     })
 
-    console.log(pets)
     expect(pets).toHaveLength(1)
   })
 })

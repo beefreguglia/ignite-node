@@ -1,6 +1,6 @@
 import { OrganizationAlreadyExistsError } from '@/use-cases/errors/organization-already-exists-error'
 import { makeAuthenticateUseCase } from '@/use-cases/factories/make-authenticate-use-case'
-import { makeCreateOrganizationUseCase } from '@/use-cases/factories/make-create-pet-use-case'
+import { makeCreateOrganizationUseCase } from '@/use-cases/factories/make-create-organization-use-case'
 import { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
 

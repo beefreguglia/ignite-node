@@ -13,6 +13,16 @@ export class PrismaOrganizationsRepository implements OrganizationsRepository {
     return organization
   }
 
+  async findById(id: string): Promise<Organization | null> {
+    const organization = await prisma.organization.findUnique({
+      where: {
+        id,
+      },
+    })
+
+    return organization
+  }
+
   async create(
     data: Prisma.OrganizationUncheckedCreateInput,
   ): Promise<Organization> {

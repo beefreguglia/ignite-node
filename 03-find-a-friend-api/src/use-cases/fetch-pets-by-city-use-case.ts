@@ -1,12 +1,13 @@
 import { PetsRepository } from '@/repositories/pets-repository'
-import { Pet } from '@prisma/client'
+import { Depends, EnergyLevel, Pet, Size, Environment } from '@prisma/client'
 
 interface FetchPetsByCityUseCaseRequest {
   city: string
   age?: string
-  size?: string
-  energy_level?: string
-  environment?: string
+  size?: Size
+  energy_level?: EnergyLevel
+  environment?: Environment
+  depends?: Depends
 }
 
 interface FetchPetsByCityUseCaseResponse {
@@ -22,6 +23,7 @@ export class FetchPetsByCityUseCase {
     energy_level,
     environment,
     size,
+    depends,
   }: FetchPetsByCityUseCaseRequest): Promise<FetchPetsByCityUseCaseResponse> {
     const pets = await this.petsRepository.findAll({
       city,
@@ -29,6 +31,7 @@ export class FetchPetsByCityUseCase {
       energy_level,
       environment,
       size,
+      depends,
     })
 
     return { pets }

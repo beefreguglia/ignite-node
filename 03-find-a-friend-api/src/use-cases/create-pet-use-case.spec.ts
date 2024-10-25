@@ -13,10 +13,10 @@ describe('Create pet use case', () => {
   beforeEach(() => {
     organizationsRepository = new InMemoryOrganizationsRepository()
     petsRepository = new InMemoryPetsRepository(organizationsRepository)
-    sut = new CreatePetUseCase(petsRepository)
+    sut = new CreatePetUseCase(organizationsRepository, petsRepository)
   })
 
-  it('should be able to create a new organization', async () => {
+  it('should be able to create a new pet', async () => {
     const organization = await organizationsRepository.create(
       makeOrganization(),
     )

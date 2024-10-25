@@ -54,7 +54,7 @@ enum Environment {
 }
 
 enum Depends {
-  SMALL
+  LOW
   MEDIUM
   HIGH
 }

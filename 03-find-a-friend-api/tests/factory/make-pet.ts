@@ -7,7 +7,7 @@ type Overwrite = {
   size?: 'SMALL' | 'MEDIUM' | 'LARGE'
   energy_level?: 'VERY_LOW' | 'LOW' | 'MEDIUM' | 'HIGH' | 'VERY_HIGH'
   environment?: 'SMALL' | 'MEDIUM' | 'LARGE'
-  depends?: 'SMALL' | 'MEDIUM' | 'HIGH'
+  depends?: 'LOW' | 'MEDIUM' | 'HIGH'
 }
 
 export function makePet(overwrite?: Overwrite) {
@@ -17,13 +17,13 @@ export function makePet(overwrite?: Overwrite) {
     name: faker.animal.dog(),
     description: faker.lorem.paragraph(),
     image: faker.image.avatarGitHub(),
-    age: overwrite?.age ?? faker.number.int(),
+    age: overwrite?.age ?? Number(faker.number.int({ max: 100, min: 1 })),
     size:
       overwrite?.size ??
       faker.helpers.arrayElement(['SMALL', 'MEDIUM', 'LARGE']),
     depends:
       overwrite?.depends ??
-      faker.helpers.arrayElement(['SMALL', 'MEDIUM', 'HIGH']),
+      faker.helpers.arrayElement(['LOW', 'MEDIUM', 'HIGH']),
     energy_level:
       overwrite?.energy_level ??
       faker.helpers.arrayElement([

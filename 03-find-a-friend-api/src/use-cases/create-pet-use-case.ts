@@ -1,9 +1,11 @@
+import { OrganizationsRepository } from '@/repositories/organizations-repository'
 import { PetsRepository } from '@/repositories/pets-repository'
 import { Pet } from '@prisma/client'
+import { OrganizationNotFoundError } from './errors/organization-not-found-error'
 
 interface CreatePetUseCaseRequest {
   age: number
-  depends: 'SMALL' | 'MEDIUM' | 'HIGH'
+  depends: 'LOW' | 'MEDIUM' | 'HIGH'
   energy_level: 'VERY_LOW' | 'LOW' | 'MEDIUM' | 'HIGH' | 'VERY_HIGH'
   description: string
   image: string
@@ -18,7 +20,10 @@ interface CreatePetUseCaseResponse {
 }
 
 export class CreatePetUseCase {
-  constructor(private petRepository: PetsRepository) {}
+  constructor(
+    private organizationsRepository: OrganizationsRepository,
+    private petRepository: PetsRepository,
+  ) {}
 
   async execute({
     age,
@@ -31,6 +36,13 @@ export class CreatePetUseCase {
     size,
     environment,
   }: CreatePetUseCaseRequest): Promise<CreatePetUseCaseResponse> {
+    const organization = await this.organizationsRepository.findById(
+      organization_id,
+    )
+
+    if (!organization) {
+      throw new OrganizationNotFoundError()
+    }
     const pet = await this.petRepository.create({
       age,
       depends,

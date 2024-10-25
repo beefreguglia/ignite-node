@@ -1,5 +1,11 @@
-import { Depends, EnergyLevel, Pet, Prisma, Size } from '@prisma/client'
-import { Environment } from 'vitest'
+import {
+  Depends,
+  EnergyLevel,
+  Pet,
+  Prisma,
+  Size,
+  Environment,
+} from '@prisma/client'
 
 export interface FindAllParams {
   city: string
