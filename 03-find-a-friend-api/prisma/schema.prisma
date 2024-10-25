@@ -7,8 +7,16 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Address {
-  id           String  @id @default(uuid())
+model Organization {
+  id String @id @default(uuid())
+
+  name       String
+  owner_name String
+  phone      String?
+
+  email    String @unique
+  password String
+
   street       String
   number       Int?
   neighborhood String
@@ -18,23 +26,8 @@ model Address {
   latitude     Decimal
   longitude    Decimal
 
-  organization Organization?
-
-  @@map("addresses")
-}
-
-model Organization {
-  id         String    @id @default(uuid())
-  name       String
-  owner_name String
-  phone      String?
-  email      String    @unique
   created_at DateTime  @default(now())
   updated_at DateTime? @updatedAt
-  password   String
-
-  Address   Address @relation(fields: [addressId], references: [id])
-  addressId String  @unique @map("address_id")
 
   Pet Pet[]
 
