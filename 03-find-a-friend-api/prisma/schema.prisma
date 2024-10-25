@@ -48,7 +48,7 @@ enum Size {
   LARGE
 }
 
-enum Space {
+enum Environment {
   SMALL
   MEDIUM
   LARGE
@@ -68,11 +68,11 @@ model Pet {
   image        String
   size         Size
   energy_level EnergyLevel
-  space        Space
+  environment  Environment
   depends      Depends
 
-  organization   Organization @relation(fields: [organizationId], references: [id])
-  organizationId String       @map("organization_id")
+  organization    Organization @relation(fields: [organization_id], references: [id])
+  organization_id String
 
   requiriments Requirement[]
 
@@ -83,8 +83,8 @@ model Requirement {
   id          String @id @default(uuid())
   description String
 
-  Pet   Pet?    @relation(fields: [petId], references: [id])
-  petId String? @map("pet_id")
+  Pet    Pet?    @relation(fields: [pet_id], references: [id])
+  pet_id String?
 
   @@map("requirements")
 }

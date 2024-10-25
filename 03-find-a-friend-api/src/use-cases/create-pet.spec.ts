@@ -1,37 +1,29 @@
 import { beforeEach, describe, expect, it } from 'vitest'
-import { InMemoryPetRepository } from '@/repositories/in-memory/pet-in-memory-repository'
+import { InMemoryPetsRepository } from '@/repositories/in-memory/pets-in-memory-repository'
 import { CreatePetUseCase } from './create-pet'
+import { InMemoryOrganizationsRepository } from '@/repositories/in-memory/organizations-in-memory-repository'
+import { makeOrganization } from 'tests/factory/make-org'
+import { makePet } from 'tests/factory/make-pet'
 
-let petsRepository: InMemoryPetRepository
+let organizationsRepository: InMemoryOrganizationsRepository
+let petsRepository: InMemoryPetsRepository
 let sut: CreatePetUseCase
 
-describe('Create organization use case', () => {
+describe('Create pet use case', () => {
   beforeEach(() => {
-    petsRepository = new InMemoryPetRepository()
+    organizationsRepository = new InMemoryOrganizationsRepository()
+    petsRepository = new InMemoryPetsRepository(organizationsRepository)
     sut = new CreatePetUseCase(petsRepository)
   })
 
   it('should be able to create a new organization', async () => {
-    const age = 1
-    const depends = 'MEDIUM'
-    const description = 'description'
-    const energy_level = 'MEDIUM'
-    const image = 'image'
-    const name = 'Test name'
-    const size = 'MEDIUM'
-    const space = 'MEDIUM'
+    const organization = await organizationsRepository.create(
+      makeOrganization(),
+    )
 
-    const { pet } = await sut.execute({
-      age,
-      depends,
-      description,
-      energy_level,
-      image,
-      name,
-      organizationId: 'Org Id',
-      size,
-      space,
-    })
+    const { pet } = await sut.execute(
+      makePet({ organization_id: organization.id }),
+    )
 
     expect(pet.id).toEqual(expect.any(String))
   })

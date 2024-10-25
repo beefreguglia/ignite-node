@@ -5,7 +5,7 @@ CREATE TYPE "EnergyLevel" AS ENUM ('VERY_LOW', 'LOW', 'MEDIUM', 'HIGH', 'VERY_HI
 CREATE TYPE "Size" AS ENUM ('SMALL', 'MEDIUM', 'LARGE');
 
 -- CreateEnum
-CREATE TYPE "Space" AS ENUM ('SMALL', 'MEDIUM', 'LARGE');
+CREATE TYPE "Environment" AS ENUM ('SMALL', 'MEDIUM', 'LARGE');
 
 -- CreateEnum
 CREATE TYPE "Depends" AS ENUM ('SMALL', 'MEDIUM', 'HIGH');
@@ -41,7 +41,7 @@ CREATE TABLE "pets" (
     "image" TEXT NOT NULL,
     "size" "Size" NOT NULL,
     "energy_level" "EnergyLevel" NOT NULL,
-    "space" "Space" NOT NULL,
+    "environment" "Environment" NOT NULL,
     "depends" "Depends" NOT NULL,
     "organization_id" TEXT NOT NULL,
 

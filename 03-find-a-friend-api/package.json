@@ -18,7 +18,8 @@
   "author": "Bernardo Freguglia",
   "license": "ISC",
   "devDependencies": {
-   "@rocketseat/eslint-config": "1.2.0",
+    "@faker-js/faker": "9.0.3",
+    "@rocketseat/eslint-config": "1.2.0",
     "@types/bcryptjs": "2.4.2",
     "@types/node": "18.14.1",
     "@types/supertest": "6.0.2",
