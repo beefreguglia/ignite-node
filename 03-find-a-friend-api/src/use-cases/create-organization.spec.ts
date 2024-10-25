@@ -58,6 +58,39 @@ describe('Create organization use case', () => {
     expect(organization.id).toEqual(expect.any(String))
   })
 
+  it('should be able to create a new organization with number and complement and phone undefined', async () => {
+    const city = 'City example'
+    const latitude = 1
+    const longitude = 1
+    const neighborhood = 'neighbor example'
+    const state = 'TS'
+    const street = 'test'
+
+    const address = await addressRepository.create({
+      city,
+      latitude,
+      longitude,
+      neighborhood,
+      state,
+      street,
+    })
+
+    const email = 'test@example.com'
+    const password = '123456'
+    const name = 'test'
+    const owner_name = 'test name'
+
+    const { organization } = await sut.execute({
+      email,
+      password,
+      name,
+      owner_name,
+      address_id: address.id,
+    })
+
+    expect(organization.id).toEqual(expect.any(String))
+  })
+
   it('should not be able to create a new organization with same email twice', async () => {
     const city = 'City example'
     const complement = 'complement'
