@@ -1,4 +1,4 @@
-name: Run E2E Tests
+name: Run E2E Tests Solid API
 
 on: 
   pull_request:

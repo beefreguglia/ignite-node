@@ -1,9 +1,9 @@
-name: Run Unit Tests SOLID API
+name: Run Unit Tests Find a Friend API
 
 on: 
   push:
     paths:
-      - '03-api-solid/**'
+      - '03-find-a-friend-api/**'
       
 jobs:
   run-unit-tests-solid-api:
@@ -16,5 +16,5 @@ jobs:
         with:
           version: 9
 
-      - run: cd 03-api-solid && pnpm install --frozen-lockfile
-      - run: cd 03-api-solid && pnpm run test
+      - run: cd 03-find-a-friend-api && pnpm install --frozen-lockfile
+      - run: cd 03-find-a-friend-api && pnpm run test
