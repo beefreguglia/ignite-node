@@ -1,6 +1,6 @@
 # API Find a Friend
 
-> Esse projeto é referente ao desenvolvimento de uma API para a adoção de animais. Ele foi desenvolvido durante o curso Ignite - Node.js da rocketseat.
+> Esse projeto é referente ao desenvolvimento de uma API para a adoção de animais. Ele foi desenvolvido durante o curso Ignite - Node.js da rocketseat. 🚀
 
 ## 💻 Tecnologias Utilizadas
 
