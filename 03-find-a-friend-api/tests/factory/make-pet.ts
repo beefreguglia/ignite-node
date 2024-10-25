@@ -13,7 +13,7 @@ type Overwrite = {
 export function makePet(overwrite?: Overwrite) {
   return {
     id: randomUUID(),
-    organization_id: overwrite?.organization_id ?? crypto.randomUUID(),
+    organization_id: overwrite?.organization_id ?? randomUUID(),
     name: faker.animal.dog(),
     description: faker.lorem.paragraph(),
     image: faker.image.avatarGitHub(),
