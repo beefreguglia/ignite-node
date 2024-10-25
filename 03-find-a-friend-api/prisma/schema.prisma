@@ -58,7 +58,7 @@ enum Size {
 enum Space {
   SMALL
   MEDIUM
-  HIGH
+  LARGE
 }
 
 enum Depends {

@@ -1,10 +1,7 @@
-import { Organization } from '@prisma/client'
+import { Organization, Prisma } from '@prisma/client'
 import { randomUUID } from 'node:crypto'
 
-import {
-  CreateProps,
-  OrganizationsRepository,
-} from '../organizations-repository'
+import { OrganizationsRepository } from '../organizations-repository'
 
 export class InMemoryOrganizationsRepository
   implements OrganizationsRepository
@@ -21,7 +18,9 @@ export class InMemoryOrganizationsRepository
     return organization
   }
 
-  async create(data: CreateProps): Promise<Organization> {
+  async create(
+    data: Prisma.OrganizationUncheckedCreateInput,
+  ): Promise<Organization> {
     const organization: Organization = {
       id: randomUUID(),
       email: data.email,
@@ -29,7 +28,7 @@ export class InMemoryOrganizationsRepository
       name: data.name,
       phone: data.phone ?? null,
       owner_name: data.owner_name,
-      addressId: data.address_id,
+      addressId: data.addressId,
       created_at: new Date(),
       updated_at: null,
     }

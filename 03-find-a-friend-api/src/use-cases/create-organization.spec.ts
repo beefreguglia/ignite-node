@@ -124,7 +124,7 @@ describe('Create organization use case', () => {
       name,
       owner_name,
       phone,
-      address_id: address.id,
+      addressId: address.id,
     })
 
     await expect(() =>

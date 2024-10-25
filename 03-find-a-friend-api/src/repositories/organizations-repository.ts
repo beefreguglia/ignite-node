@@ -1,18 +1,6 @@
-import { Organization } from '@prisma/client'
-
-export interface CreateProps {
-  id?: string
-  name: string
-  owner_name: string
-  phone?: string | null
-  email: string
-  created_at?: Date | string
-  updated_at?: Date | string | null
-  address_id: string
-  password: string
-}
+import { Organization, Prisma } from '@prisma/client'
 
 export interface OrganizationsRepository {
-  create(data: CreateProps): Promise<Organization>
+  create(data: Prisma.OrganizationUncheckedCreateInput): Promise<Organization>
   findByEmail(email: string): Promise<Organization | null>
 }
