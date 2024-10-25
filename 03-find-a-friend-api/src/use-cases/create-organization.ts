@@ -14,8 +14,6 @@ interface CreateOrganizationUseCaseRequest {
   complement?: string
   city: string
   state: string
-  latitude: number
-  longitude: number
   neighborhood: string
 }
 
@@ -33,8 +31,6 @@ export class CreateOrganizationUseCase {
     phone,
     password,
     city,
-    latitude,
-    longitude,
     neighborhood,
     state,
     street,
@@ -57,8 +53,6 @@ export class CreateOrganizationUseCase {
       phone,
       password: password_hash,
       city,
-      latitude,
-      longitude,
       neighborhood,
       state,
       street,

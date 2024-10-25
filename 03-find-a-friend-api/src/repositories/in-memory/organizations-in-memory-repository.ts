@@ -30,8 +30,6 @@ export class InMemoryOrganizationsRepository
       owner_name: data.owner_name,
       city: data.city,
       complement: data.complement ?? null,
-      latitude: new Prisma.Decimal(data.latitude.toString()),
-      longitude: new Prisma.Decimal(data.longitude.toLocaleString()),
       neighborhood: data.neighborhood,
       number: data.number ?? null,
       state: data.state,

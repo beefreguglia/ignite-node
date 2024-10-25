@@ -23,8 +23,6 @@ model Organization {
   city         String
   state        String
   complement   String?
-  latitude     Decimal
-  longitude    Decimal
 
   created_at DateTime  @default(now())
   updated_at DateTime? @updatedAt

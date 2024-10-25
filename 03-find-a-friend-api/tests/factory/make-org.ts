@@ -20,8 +20,6 @@ export function makeOrganization(overwrite?: Overwrite) {
     owner_name: faker.person.fullName(),
     city: overwrite?.city ?? faker.location.city(),
     complement: overwrite?.complement,
-    latitude: faker.location.latitude(),
-    longitude: faker.location.longitude(),
     neighborhood: faker.location.streetAddress(),
     number: Number(faker.location.buildingNumber()),
     state: faker.location.state(),
