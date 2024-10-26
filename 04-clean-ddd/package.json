@@ -5,13 +5,17 @@
   "main": "index.js",
   "scripts": {
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "lint": "eslint src",
+    "lint:fix": "eslint src --fix"
   },
   "keywords": [],
   "author": "Bernardo Freguglia",
   "license": "ISC",
   "devDependencies": {
+    "@rocketseat/eslint-config": "^3.0.12",
     "@types/node": "^22.7.9",
+    "eslint": "^9.13.0",
     "typescript": "^5.6.3",
     "vitest": "^2.1.3"
   },
