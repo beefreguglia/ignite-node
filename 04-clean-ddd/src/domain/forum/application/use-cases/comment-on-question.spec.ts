@@ -12,7 +12,7 @@ let inMemoryQuestionsRepository: InMemoryQuestionsRepository
 let inMemoryQuestionCommentsRepository: InMemoryQuestionCommentsRepository
 let sut: CommentOnQuestionUseCase
 
-describe('Create question', () => {
+describe('Comment on question', () => {
   beforeEach(() => {
     inMemoryQuestionsRepository = new InMemoryQuestionsRepository()
     inMemoryQuestionCommentsRepository =
@@ -24,7 +24,7 @@ describe('Create question', () => {
     )
   })
 
-  it('should not be able to choose another user question best answer',
+  it('should be able to comment question',
     async () => {
       const question = makeQuestion()
 
