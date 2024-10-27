@@ -7,7 +7,7 @@ import { Question } from '../../src/domain/forum/enterprise/entities/question'
 export class InMemoryQuestionsRepository implements QuestionsRepository {
   public items: Question[] = []
 
-  async findById(id: string): Promise<Question | null> {
+  async findByID(id: string): Promise<Question | null> {
     const question = this
       .items.find((item) => item.id.toString() === id)
 

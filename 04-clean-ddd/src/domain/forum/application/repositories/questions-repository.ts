@@ -4,7 +4,7 @@ import {
 import { Question } from '../../enterprise/entities/question'
 
 export interface QuestionsRepository {
-  findById(id: string): Promise<Question | null>
+  findByID(id: string): Promise<Question | null>
   findBySlug(slug: string): Promise<Question | null>
   findManyRecent(params: PaginationParams): Promise<Question[]>
   create(question: Question): Promise<void>

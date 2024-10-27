@@ -2,12 +2,12 @@ import dayjs from 'dayjs'
 
 import { Slug } from './value-objects/slug'
 import { Entity } from '../../../../core/entities/entity'
-import { UniqueEntityId } from '../../../../core/entities/unique-entity-id'
+import { UniqueEntityID } from '../../../../core/entities/unique-entity-id'
 import { Optional } from '../../../../core/types/optional'
 
 export interface QuestionProps {
-  authorId: UniqueEntityId
-  bestAnswerId?: UniqueEntityId
+  authorID: UniqueEntityID
+  bestAnswerID?: UniqueEntityID
   title: string
   content: string
   slug: Slug
@@ -16,12 +16,12 @@ export interface QuestionProps {
 }
 
 export class Question extends Entity<QuestionProps> {
-  get authorId() {
-    return this.props.authorId
+  get authorID() {
+    return this.props.authorID
   }
 
-  get bestAnswerId() {
-    return this.props.bestAnswerId
+  get bestAnswerID() {
+    return this.props.bestAnswerID
   }
 
   get title() {
@@ -63,14 +63,14 @@ export class Question extends Entity<QuestionProps> {
     this.touch()
   }
 
-  set bestAnswerId(bestAnswerId: UniqueEntityId | undefined) {
-    this.props.bestAnswerId = bestAnswerId
+  set bestAnswerID(bestAnswerID: UniqueEntityID | undefined) {
+    this.props.bestAnswerID = bestAnswerID
     this.touch()
   }
 
   static create(
     props: Optional<QuestionProps, 'createdAt' | 'slug'>,
-    id?: UniqueEntityId,
+    id?: UniqueEntityID,
   ) {
     const question = new Question({
       ...props,

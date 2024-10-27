@@ -27,33 +27,33 @@ describe('Choose best answer question', () => {
   it('should be able to edit a question', async () => {
     const question = makeQuestion()
     const answer = makeAnswer({
-      questionId: question.id,
+      questionID: question.id,
     })
 
     await inMemoryQuestionsRepository.create(question)
     await inMemoryAnswersRepository.create(answer)
 
     await sut.execute({
-      answerId: answer.id.toString(),
-      authorId: question.authorId.toString(),
+      answerID: answer.id.toString(),
+      authorID: question.authorID.toString(),
     })
 
-    expect(inMemoryQuestionsRepository.items[0].bestAnswerId).toEqual(answer.id)
+    expect(inMemoryQuestionsRepository.items[0].bestAnswerID).toEqual(answer.id)
   })
 
   it('should not be able to choose another user question best answer',
     async () => {
       const question = makeQuestion()
       const answer = makeAnswer({
-        questionId: question.id,
+        questionID: question.id,
       })
 
       await inMemoryQuestionsRepository.create(question)
       await inMemoryAnswersRepository.create(answer)
 
       await expect(() => sut.execute({
-        answerId: answer.id.toString(),
-        authorId: 'author-2',
+        answerID: answer.id.toString(),
+        authorID: 'author-2',
       })).rejects.toBeInstanceOf(Error)
     },
   )

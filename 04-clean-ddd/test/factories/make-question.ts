@@ -1,6 +1,6 @@
 import { faker } from '@faker-js/faker'
 
-import { UniqueEntityId } from '../../src/core/entities/unique-entity-id'
+import { UniqueEntityID } from '../../src/core/entities/unique-entity-id'
 import {
   Question,
   QuestionProps,
@@ -8,10 +8,10 @@ import {
 
 export function makeQuestion(
   override?: Partial<QuestionProps>,
-  id?: UniqueEntityId,
+  id?: UniqueEntityID,
 ) {
   const question = Question.create({
-    authorId: new UniqueEntityId(faker.string.uuid()),
+    authorID: new UniqueEntityID(faker.string.uuid()),
     title: faker.lorem.sentence(),
     content: faker.lorem.text(),
     ...override,

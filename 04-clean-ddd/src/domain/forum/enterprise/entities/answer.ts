@@ -1,24 +1,24 @@
 import dayjs from 'dayjs'
 
 import { Entity } from '../../../../core/entities/entity'
-import { UniqueEntityId } from '../../../../core/entities/unique-entity-id'
+import { UniqueEntityID } from '../../../../core/entities/unique-entity-id'
 import { Optional } from '../../../../core/types/optional'
 
 export interface AnswerProps {
-  authorId: UniqueEntityId
-  questionId: UniqueEntityId
+  authorID: UniqueEntityID
+  questionID: UniqueEntityID
   content: string
   createdAt: Date
   updatedAt?: Date
 }
 
 export class Answer extends Entity<AnswerProps> {
-  get authorId() {
-    return this.props.authorId
+  get authorID() {
+    return this.props.authorID
   }
 
-  get questionId() {
-    return this.props.questionId
+  get questionID() {
+    return this.props.questionID
   }
 
   get content() {
@@ -48,7 +48,7 @@ export class Answer extends Entity<AnswerProps> {
 
   static create(
     props: Optional<AnswerProps, 'createdAt'>,
-    id?: UniqueEntityId,
+    id?: UniqueEntityID,
   ) {
     const answer = new Answer({
       ...props,

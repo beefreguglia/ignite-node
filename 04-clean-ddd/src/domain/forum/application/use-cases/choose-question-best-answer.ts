@@ -3,8 +3,8 @@ import { AnswersRepository } from '../repositories/answers-repository'
 import { QuestionsRepository } from '../repositories/questions-repository'
 
 interface ChooseQuestionBestAnswerUseCaseRequest {
-  authorId: string
-  answerId: string
+  authorID: string
+  answerID: string
 }
 
 interface ChooseQuestionBestAnswerUseCaseResponse {
@@ -18,28 +18,28 @@ export class ChooseQuestionBestAnswerUseCase {
   ) {}
 
   async execute({
-    authorId,
-    answerId,
+    authorID,
+    answerID,
   }: ChooseQuestionBestAnswerUseCaseRequest)
     : Promise<ChooseQuestionBestAnswerUseCaseResponse> {
-    const answer = await this.answersRepository.findById(answerId)
+    const answer = await this.answersRepository.findByID(answerID)
 
     if (!answer) {
       throw new Error('Answer not found.')
     }
 
     const question = await this.questionsRepository
-      .findById(answer.questionId.toString())
+      .findByID(answer.questionID.toString())
 
     if (!question) {
       throw new Error('Question not found.')
     }
 
-    if (authorId !== question.authorId.toString()) {
+    if (authorID !== question.authorID.toString()) {
       throw new Error('Not allowed.')
     }
 
-    question.bestAnswerId = answer.id
+    question.bestAnswerID = answer.id
 
     await this.questionsRepository.save(question)
 
