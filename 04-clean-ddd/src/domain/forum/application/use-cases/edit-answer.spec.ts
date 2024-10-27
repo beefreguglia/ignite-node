@@ -10,7 +10,7 @@ import { UniqueEntityId } from '../../../../core/entities/unique-entity-id'
 let inMemoryAnswersRepository: InMemoryAnswersRepository
 let sut: EditAnswerUseCase
 
-describe('Edit Answer', () => {
+describe('Edit answer', () => {
   beforeEach(() => {
     inMemoryAnswersRepository = new InMemoryAnswersRepository()
     sut = new EditAnswerUseCase(inMemoryAnswersRepository)
