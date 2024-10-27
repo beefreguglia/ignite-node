@@ -7,7 +7,7 @@ import {
 } from '../../src/domain/forum/enterprise/entities/answer'
 
 export function makeAnswer(
-  override: Partial<AnswerProps>,
+  override?: Partial<AnswerProps>,
   id?: UniqueEntityId,
 ) {
   const answer = Answer.create({
