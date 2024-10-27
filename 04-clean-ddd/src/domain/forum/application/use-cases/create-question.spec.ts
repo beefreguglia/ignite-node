@@ -1,7 +1,7 @@
 import { describe, expect, it, beforeEach } from 'vitest'
 import {
   InMemoryQuestionsRepository,
-} from 'test/repositories/in-memory-questions-repository'
+} from '../../../../../test/repositories/in-memory-questions-repository'
 import { CreateQuestionUseCase } from './create-question'
 
 let inMemoryQuestionsRepository: InMemoryQuestionsRepository
