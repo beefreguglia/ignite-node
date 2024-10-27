@@ -1,3 +1,4 @@
+import { PaginationParams } from '../../src/core/repositories/pagination-params'
 import {
   QuestionCommentsRepository,
 } from
@@ -19,6 +20,17 @@ implements QuestionCommentsRepository {
     }
 
     return questionComment
+  }
+
+  async findManyByQuestionID(
+    questionID: string,
+    { page }: PaginationParams,
+  ): Promise<QuestionComment[]> {
+    const questionComments = this.items
+      .filter((item) => item.questionID.toString() === questionID)
+      .slice((page - 1) * 20, page * 20)
+
+    return questionComments
   }
 
   async create(questionComment: QuestionComment): Promise<void> {
