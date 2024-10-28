@@ -4,7 +4,9 @@ import { Question } from '../../enterprise/entities/question'
 import {
   QuestionAttachment,
 } from '../../enterprise/entities/question-attachment'
-import { QuestionAttachmentList } from '../../enterprise/entities/question-attachment0list'
+import {
+  QuestionAttachmentList,
+} from '../../enterprise/entities/question-attachment0list'
 import { QuestionsRepository } from '../repositories/questions-repository'
 
 interface CreateQuestionUseCaseRequest {
