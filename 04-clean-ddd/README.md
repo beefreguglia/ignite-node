@@ -1,16 +1,38 @@
-# DDD (Domain-driven Design)
+# API Clean DDD
 
-Design dirigido à domínio
+> Esse projeto é referente ao desenvolvimento de uma API para um forúm digital. Ele foi desenvolvido durante o curso Ignite - Node.js da rocketseat. 🚀🚀
 
-## Domínio
+## 💻 Tecnologias Utilizadas
 
-- Domain Experts
-  - Conversa
-- Linguagem ubíqua
+- @faker-js/faker
+- @rocketseat/eslint-config
+- eslint
+- typescript
+- vitest
+- dayjs
 
-- Entidades (1)
-- Casos de uso (1)
-- Agregados (2)
-- Value Objects
-- Eventos de domínio
-- Subdomínios (Bounded Contexts)
+## DDD
+
+### Entidades
+- Student
+- Instructor
+- Question
+- Answer
+- Question Comments
+- Answer Comments
+
+### Aggregate Root
+- Question
+
+### WatchedList
+- Question Attachments
+- Answer Attachments
+  
+## Requisitos funcionais
+
+- [ ] 
+
+
+## Regras de negócio
+
+- [ ]  
