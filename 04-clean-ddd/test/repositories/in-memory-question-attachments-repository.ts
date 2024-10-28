@@ -18,4 +18,11 @@ implements QuestionAttachmentsRepository {
 
     return questionAttachment
   }
+
+  async deleteManyByQuestionID(questionID: string): Promise<void> {
+    const questionAttachments = this.items
+      .filter((item) => item.questionID.toString() !== questionID)
+
+    this.items = questionAttachments
+  }
 }

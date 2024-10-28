@@ -11,7 +11,9 @@ import {
   InMemoryQuestionAttachmentsRepository,
 // eslint-disable-next-line @stylistic/max-len
 } from '../../../../../test/repositories/in-memory-question-attachments-repository'
-import { makeQuestionAttachment } from '../../../../../test/factories/make-question-attachment'
+import {
+  makeQuestionAttachment,
+} from '../../../../../test/factories/make-question-attachment'
 
 let inMemoryQuestionsRepository: InMemoryQuestionsRepository
 let inMemoryQuestionsAttachmentsRepository
@@ -20,9 +22,11 @@ let sut: EditQuestionUseCase
 
 describe('Edit question', () => {
   beforeEach(() => {
-    inMemoryQuestionsRepository = new InMemoryQuestionsRepository()
     inMemoryQuestionsAttachmentsRepository =
       new InMemoryQuestionAttachmentsRepository()
+    inMemoryQuestionsRepository = new InMemoryQuestionsRepository(
+      inMemoryQuestionsAttachmentsRepository,
+    )
     sut = new EditQuestionUseCase(
       inMemoryQuestionsRepository,
       inMemoryQuestionsAttachmentsRepository,

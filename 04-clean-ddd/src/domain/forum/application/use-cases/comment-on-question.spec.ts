@@ -7,14 +7,24 @@ import {
 } from '../../../../../test/repositories/in-memory-question-comments-repository'
 import { CommentOnQuestionUseCase } from './comment-on-question'
 import { makeQuestion } from '../../../../../test/factories/make-question'
+import {
+  InMemoryQuestionAttachmentsRepository,
+// eslint-disable-next-line @stylistic/max-len
+} from '../../../../../test/repositories/in-memory-question-attachments-repository'
 
+let inMemoryQuestionsAttachmentsRepository:
+InMemoryQuestionAttachmentsRepository
 let inMemoryQuestionsRepository: InMemoryQuestionsRepository
 let inMemoryQuestionCommentsRepository: InMemoryQuestionCommentsRepository
 let sut: CommentOnQuestionUseCase
 
 describe('Comment on question', () => {
   beforeEach(() => {
-    inMemoryQuestionsRepository = new InMemoryQuestionsRepository()
+    inMemoryQuestionsAttachmentsRepository =
+    new InMemoryQuestionAttachmentsRepository()
+    inMemoryQuestionsRepository = new InMemoryQuestionsRepository(
+      inMemoryQuestionsAttachmentsRepository,
+    )
     inMemoryQuestionCommentsRepository =
       new InMemoryQuestionCommentsRepository()
 

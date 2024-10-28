@@ -4,14 +4,25 @@ import { makeQuestion } from '../../../../../test/factories/make-question'
 import {
   InMemoryQuestionsRepository,
 } from '../../../../../test/repositories/in-memory-questions-repository'
-import { FetchRecentQuestionsUseCase } from './fetch-recent-questions'
 
+import { FetchRecentQuestionsUseCase } from './fetch-recent-questions'
+import {
+  InMemoryQuestionAttachmentsRepository,
+// eslint-disable-next-line @stylistic/max-len
+} from '../../../../../test/repositories/in-memory-question-attachments-repository'
+
+let inMemoryQuestionsAttachmentsRepository
+: InMemoryQuestionAttachmentsRepository
 let inMemoryQuestionsRepository: InMemoryQuestionsRepository
 let sut: FetchRecentQuestionsUseCase
 
 describe('Fetch recent questions', () => {
   beforeEach(() => {
-    inMemoryQuestionsRepository = new InMemoryQuestionsRepository()
+    inMemoryQuestionsAttachmentsRepository =
+    new InMemoryQuestionAttachmentsRepository()
+    inMemoryQuestionsRepository = new InMemoryQuestionsRepository(
+      inMemoryQuestionsAttachmentsRepository,
+    )
     sut = new FetchRecentQuestionsUseCase(inMemoryQuestionsRepository)
   })
 

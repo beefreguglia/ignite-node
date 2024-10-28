@@ -1,11 +1,19 @@
 import { PaginationParams } from '../../src/core/repositories/pagination-params'
 import {
+  QuestionAttachmentsRepository,
+// eslint-disable-next-line @stylistic/max-len
+} from '../../src/domain/forum/application/repositories/question-attachments-repository'
+import {
   QuestionsRepository,
 } from '../../src/domain/forum/application/repositories/questions-repository'
 import { Question } from '../../src/domain/forum/enterprise/entities/question'
 
 export class InMemoryQuestionsRepository implements QuestionsRepository {
   public items: Question[] = []
+
+  constructor(
+    private questionAttachmentsRepository: QuestionAttachmentsRepository,
+  ) {}
 
   async findByID(id: string): Promise<Question | null> {
     const question = this
@@ -51,5 +59,9 @@ export class InMemoryQuestionsRepository implements QuestionsRepository {
   async delete(question: Question): Promise<void> {
     const itemIndex = this.items.findIndex((item) => item.id === question.id)
     this.items.splice(itemIndex, 1)
+
+    this.questionAttachmentsRepository.deleteManyByQuestionID(
+      question.id.toString(),
+    )
   }
 }
