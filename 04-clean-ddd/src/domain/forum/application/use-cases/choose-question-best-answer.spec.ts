@@ -14,7 +14,13 @@ import {
   InMemoryQuestionAttachmentsRepository,
 // eslint-disable-next-line @stylistic/max-len
 } from '../../../../../test/repositories/in-memory-question-attachments-repository'
+import {
+  InMemoryAnswerAttachmentsRepository,
+// eslint-disable-next-line @stylistic/max-len
+} from '../../../../../test/repositories/in-memory-answer-attachments-repository'
 
+let inMemoryAnswersAttachmentsRepository:
+InMemoryAnswerAttachmentsRepository
 let inMemoryQuestionsAttachmentsRepository:
 InMemoryQuestionAttachmentsRepository
 let inMemoryQuestionsRepository: InMemoryQuestionsRepository
@@ -23,12 +29,16 @@ let sut: ChooseQuestionBestAnswerUseCase
 
 describe('Choose best answer question', () => {
   beforeEach(() => {
+    inMemoryAnswersAttachmentsRepository =
+    new InMemoryAnswerAttachmentsRepository()
     inMemoryQuestionsAttachmentsRepository =
     new InMemoryQuestionAttachmentsRepository()
     inMemoryQuestionsRepository = new InMemoryQuestionsRepository(
       inMemoryQuestionsAttachmentsRepository,
     )
-    inMemoryAnswersRepository = new InMemoryAnswersRepository()
+    inMemoryAnswersRepository = new InMemoryAnswersRepository(
+      inMemoryAnswersAttachmentsRepository,
+    )
     sut = new ChooseQuestionBestAnswerUseCase(
       inMemoryQuestionsRepository,
       inMemoryAnswersRepository,

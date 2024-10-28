@@ -6,13 +6,23 @@ import {
 import { FetchQuestionAnswersUseCase } from './fetch-question-answers'
 import { makeAnswer } from '../../../../../test/factories/make-answer'
 import { UniqueEntityID } from '../../../../core/entities/unique-entity-id'
+import {
+  InMemoryAnswerAttachmentsRepository,
+// eslint-disable-next-line @stylistic/max-len
+} from '../../../../../test/repositories/in-memory-answer-attachments-repository'
 
+let inMemoryAnswersAttachmentsRepository:
+InMemoryAnswerAttachmentsRepository
 let inMemoryAnswersRepository: InMemoryAnswersRepository
 let sut: FetchQuestionAnswersUseCase
 
 describe('Fetch question answers', () => {
   beforeEach(() => {
-    inMemoryAnswersRepository = new InMemoryAnswersRepository()
+    inMemoryAnswersAttachmentsRepository =
+    new InMemoryAnswerAttachmentsRepository()
+    inMemoryAnswersRepository = new InMemoryAnswersRepository(
+      inMemoryAnswersAttachmentsRepository,
+    )
     sut = new FetchQuestionAnswersUseCase(inMemoryAnswersRepository)
   })
 

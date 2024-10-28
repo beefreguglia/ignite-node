@@ -7,14 +7,24 @@ import {
 } from '../../../../../test/repositories/in-memory-answer-comments-repository'
 import { CommentOnAnswerUseCase } from './comment-on-answer'
 import { makeAnswer } from '../../../../../test/factories/make-answer'
+import {
+  InMemoryAnswerAttachmentsRepository,
+// eslint-disable-next-line @stylistic/max-len
+} from '../../../../../test/repositories/in-memory-answer-attachments-repository'
 
+let inMemoryAnswersAttachmentsRepository:
+InMemoryAnswerAttachmentsRepository
 let inMemoryAnswersRepository: InMemoryAnswersRepository
 let inMemoryAnswerCommentsRepository: InMemoryAnswerCommentsRepository
 let sut: CommentOnAnswerUseCase
 
 describe('Create a comment answer', () => {
   beforeEach(() => {
-    inMemoryAnswersRepository = new InMemoryAnswersRepository()
+    inMemoryAnswersAttachmentsRepository =
+    new InMemoryAnswerAttachmentsRepository()
+    inMemoryAnswersRepository = new InMemoryAnswersRepository(
+      inMemoryAnswersAttachmentsRepository,
+    )
     inMemoryAnswerCommentsRepository =
       new InMemoryAnswerCommentsRepository()
 

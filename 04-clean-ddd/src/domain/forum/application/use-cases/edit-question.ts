@@ -6,7 +6,7 @@ import {
 } from '../../enterprise/entities/question-attachment'
 import {
   QuestionAttachmentList,
-} from '../../enterprise/entities/question-attachment0list'
+} from '../../enterprise/entities/question-attachment-list'
 import {
   QuestionAttachmentsRepository,
 } from '../repositories/question-attachments-repository'
