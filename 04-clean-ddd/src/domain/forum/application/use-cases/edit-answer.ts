@@ -2,7 +2,7 @@ import { Either, left, right } from '../../../../core/either'
 import { Answer } from '../../enterprise/entities/answer'
 import { AnswersRepository } from '../repositories/answers-repository'
 import { NotAllowedError } from './errors/not-allowed-error'
-import { ResourceNotFoundError } from './errors/resourse-not-found-error'
+import { ResourceNotFoundError } from './errors/resource-not-found-error'
 
 interface EditAnswerUseCaseRequest {
   authorID: string

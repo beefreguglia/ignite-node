@@ -12,7 +12,7 @@ let inMemoryAnswersRepository: InMemoryAnswersRepository
 let inMemoryAnswerCommentsRepository: InMemoryAnswerCommentsRepository
 let sut: CommentOnAnswerUseCase
 
-describe('Create answer', () => {
+describe('Create a comment answer', () => {
   beforeEach(() => {
     inMemoryAnswersRepository = new InMemoryAnswersRepository()
     inMemoryAnswerCommentsRepository =
@@ -24,19 +24,20 @@ describe('Create answer', () => {
     )
   })
 
-  it('should not be able to choose another user answer best answer',
+  it('should be able to comment on answer',
     async () => {
       const answer = makeAnswer()
 
       await inMemoryAnswersRepository.create(answer)
 
-      const { answerComment } = await sut.execute({
+      const result = await sut.execute({
         answerID: answer.id.toString(),
         authorID: answer.authorID.toString(),
         content: 'Comentário teste',
       })
 
-      expect(inMemoryAnswerCommentsRepository.items[0].content)
-        .toEqual(answerComment.content)
+      expect(result.isRight()).toBe(true)
+      expect(inMemoryAnswerCommentsRepository.items[0])
+        .toEqual(result.value?.answerComment)
     })
 })
