@@ -8,16 +8,9 @@ Design dirigido à domínio
   - Conversa
 - Linguagem ubíqua
 
-- Usuário
-  - Cliente
-  - Fornecedor
-  - Atendente
-  - Barman
-
 - Entidades (1)
 - Casos de uso (1)
-  
-- Agregados
+- Agregados (2)
 - Value Objects
 - Eventos de domínio
 - Subdomínios (Bounded Contexts)
