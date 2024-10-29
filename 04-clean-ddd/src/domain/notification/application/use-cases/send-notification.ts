@@ -5,13 +5,13 @@ import {
   NotificationsRepository,
 } from '../repositories/notifications-repository'
 
-export interface SendNotificationUseCaseRequest {
+interface SendNotificationUseCaseRequest {
   recipientID: string
   title: string
   content: string
 }
 
-export type SendNotificationUseCaseResponse = Either<
+type SendNotificationUseCaseResponse = Either<
   null,
   {
     notification: Notification
