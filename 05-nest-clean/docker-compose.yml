@@ -1,13 +1,13 @@
 services:
   postgres:
+    container_name: nest-clean-pg
     image: "bitnami/postgresql:latest"
     ports:
       - "5432:5432"
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: next-clean
-      PGDATA: /data/postgres
+      POSTGRES_DB: net-clean
     volumes:
-      - ./data/pg:/data/postgres
+      - ./data/pg:/var/lib/postgresql/data
 
