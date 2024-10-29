@@ -5,7 +5,9 @@ import {
   QuestionCommentsRepository,
 } from '../repositories/question-comments-repository'
 import { QuestionsRepository } from '../repositories/questions-repository'
-import { ResourceNotFoundError } from './errors/resource-not-found-error'
+import {
+  ResourceNotFoundError,
+} from '../../../../core/errors/errors/resource-not-found-error'
 
 interface CommentOnQuestionUseCaseRequest {
   authorID: string

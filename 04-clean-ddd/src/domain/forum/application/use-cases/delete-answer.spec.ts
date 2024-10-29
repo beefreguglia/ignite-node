@@ -5,7 +5,9 @@ import {
 import { DeleteAnswerUseCase } from './delete-answer'
 import { UniqueEntityID } from '../../../../core/entities/unique-entity-id'
 import { makeAnswer } from '../../../../../test/factories/make-answer'
-import { NotAllowedError } from './errors/not-allowed-error'
+import {
+  NotAllowedError,
+} from '../../../../core/errors/errors/not-allowed-error'
 import {
   InMemoryAnswerAttachmentsRepository,
 // eslint-disable-next-line @stylistic/max-len
