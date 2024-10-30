@@ -5,11 +5,11 @@ import { AnswerComment } from '@/domain/forum/enterprise/entities/answer-comment
 export class PrismaAnswerCommentsRepository
   implements AnswerCommentsRepository
 {
-  findByID(id: string): Promise<AnswerComment | null> {
+  findById(id: string): Promise<AnswerComment | null> {
     throw new Error('Method not implemented.')
   }
 
-  findManyByAnswerID(
+  findManyByAnswerId(
     id: string,
     params: PaginationParams,
   ): Promise<AnswerComment[]> {

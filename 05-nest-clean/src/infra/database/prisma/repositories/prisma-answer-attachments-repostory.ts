@@ -4,11 +4,11 @@ import { AnswerAttachment } from '@/domain/forum/enterprise/entities/answer-atta
 export class PrismaAnswerAttachmentsRepository
   implements AnswerAttachmentsRepository
 {
-  findManyByAnswerID(answerID: string): Promise<AnswerAttachment[]> {
+  findManyByAnswerId(answerId: string): Promise<AnswerAttachment[]> {
     throw new Error('Method not implemented.')
   }
 
-  deleteManyByAnswerID(answerID: string): Promise<void> {
+  deleteManyByAnswerId(answerId: string): Promise<void> {
     throw new Error('Method not implemented.')
   }
 }

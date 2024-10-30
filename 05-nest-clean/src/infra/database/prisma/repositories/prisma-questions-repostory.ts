@@ -4,19 +4,24 @@ import { PaginationParams } from '@/core/repositories/pagination-params'
 import { QuestionsRepository } from '@/domain/forum/application/repositories/questions-repository'
 import { Question } from '@/domain/forum/enterprise/entities/question'
 import { PrismaService } from '../prisma.service'
+import { PrismaQuestionMapper } from '../mappers/prisma-question-mapper'
 
 @Injectable()
-class PrismaQuestionRepository implements QuestionsRepository {
+export class PrismaQuestionRepository implements QuestionsRepository {
   constructor(private prisma: PrismaService) {}
 
-  async findByID(id: string): Promise<Question | null> {
+  async findById(id: string): Promise<Question | null> {
     const question = await this.prisma.question.findUnique({
       where: {
         id,
       },
     })
 
-    return { question }
+    if (!question) {
+      return null
+    }
+
+    return PrismaQuestionMapper.toDomain(question)
   }
 
   findBySlug(slug: string): Promise<Question | null> {

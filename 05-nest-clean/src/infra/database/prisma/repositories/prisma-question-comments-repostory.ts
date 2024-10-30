@@ -5,11 +5,11 @@ import { QuestionComment } from '@/domain/forum/enterprise/entities/question-com
 export class PrismaQuestionCommentsRepository
   implements QuestionCommentsRepository
 {
-  findByID(id: string): Promise<QuestionComment | null> {
+  findById(id: string): Promise<QuestionComment | null> {
     throw new Error('Method not implemented.')
   }
 
-  findManyByQuestionID(
+  findManyByQuestionId(
     id: string,
     params: PaginationParams,
   ): Promise<QuestionComment[]> {

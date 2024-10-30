@@ -4,11 +4,11 @@ import { QuestionAttachment } from '@/domain/forum/enterprise/entities/question-
 export class PrismaQuestionAttachmentsRepository
   implements QuestionAttachmentsRepository
 {
-  findManyByQuestionID(questionID: string): Promise<QuestionAttachment[]> {
+  findManyByQuestionId(questionId: string): Promise<QuestionAttachment[]> {
     throw new Error('Method not implemented.')
   }
 
-  deleteManyByQuestionID(questionID: string): Promise<void> {
+  deleteManyByQuestionId(questionId: string): Promise<void> {
     throw new Error('Method not implemented.')
   }
 }
