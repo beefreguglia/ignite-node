@@ -30,8 +30,8 @@ describe('Comment on Answer', () => {
     const answer = makeAnswer()
     await inMemoryAnswersRepository.create(answer)
     await sut.execute({
-      answerID: answer.id.toString(),
-      authorID: answer.authorID.toString(),
+      answerId: answer.id.toString(),
+      authorId: answer.authorId.toString(),
       content: 'Comentário teste',
     })
 

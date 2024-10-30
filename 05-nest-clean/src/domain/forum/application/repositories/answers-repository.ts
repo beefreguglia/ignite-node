@@ -2,9 +2,9 @@ import { PaginationParams } from '../../../../core/repositories/pagination-param
 import { Answer } from '../../enterprise/entities/answer'
 
 export interface AnswersRepository {
-  findByID(id: string): Promise<Answer | null>
-  findManyByQuestionID(
-    questionID: string,
+  findById(id: string): Promise<Answer | null>
+  findManyByQuestionId(
+    questionId: string,
     params: PaginationParams,
   ): Promise<Answer[]>
   create(answer: Answer): Promise<void>

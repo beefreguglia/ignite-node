@@ -1,5 +1,5 @@
 import { AggregateRoot } from '../entities/aggregate-root'
-import { UniqueEntityID } from '../entities/unique-entity-id'
+import { UniqueEntityId } from '../entities/unique-entity-id'
 import { DomainEvent } from './domain-event'
 
 type DomainEventCallback = (event: unknown) => void
@@ -9,7 +9,7 @@ export class DomainEvents {
   private static markedAggregates: AggregateRoot<unknown>[] = []
 
   public static markAggregateForDispatch(aggregate: AggregateRoot<unknown>) {
-    const aggregateFound = !!this.findMarkedAggregateByID(aggregate.id)
+    const aggregateFound = !!this.findMarkedAggregateById(aggregate.id)
     if (!aggregateFound) {
       this.markedAggregates.push(aggregate)
     }
@@ -26,14 +26,14 @@ export class DomainEvents {
     this.markedAggregates.splice(index, 1)
   }
 
-  private static findMarkedAggregateByID(
-    id: UniqueEntityID,
+  private static findMarkedAggregateById(
+    id: UniqueEntityId,
   ): AggregateRoot<unknown> | undefined {
     return this.markedAggregates.find((aggregate) => aggregate.id.equals(id))
   }
 
-  public static dispatchEventsForAggregate(id: UniqueEntityID) {
-    const aggregate = this.findMarkedAggregateByID(id)
+  public static dispatchEventsForAggregate(id: UniqueEntityId) {
+    const aggregate = this.findMarkedAggregateById(id)
     if (aggregate) {
       this.dispatchAggregateEvents(aggregate)
       aggregate.clearEvents()

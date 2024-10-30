@@ -1,5 +1,5 @@
 import { Either, left, right } from '../../../../core/either'
-import { UniqueEntityID } from '../../../../core/entities/unique-entity-id'
+import { UniqueEntityId } from '../../../../core/entities/unique-entity-id'
 import { Question } from '../../enterprise/entities/question'
 import { QuestionAttachment } from '../../enterprise/entities/question-attachment'
 import { QuestionAttachmentList } from '../../enterprise/entities/question-attachment-list'
@@ -9,11 +9,11 @@ import { NotAllowedError } from '../../../../core/errors/errors/not-allowed-erro
 import { ResourceNotFoundError } from '../../../../core/errors/errors/resource-not-found-error'
 
 interface EditQuestionUseCaseRequest {
-  authorID: string
-  questionID: string
+  authorId: string
+  questionId: string
   title: string
   content: string
-  attachmentsIDs: string[]
+  attachmentsIds: string[]
 }
 
 type EditQuestionUseCaseResponse = Either<
@@ -30,33 +30,33 @@ export class EditQuestionUseCase {
   ) {}
 
   async execute({
-    authorID,
-    questionID,
+    authorId,
+    questionId,
     content,
     title,
-    attachmentsIDs,
+    attachmentsIds,
   }: EditQuestionUseCaseRequest): Promise<EditQuestionUseCaseResponse> {
-    const question = await this.questionsRepository.findByID(questionID)
+    const question = await this.questionsRepository.findById(questionId)
 
     if (!question) {
       return left(new ResourceNotFoundError())
     }
 
-    if (authorID !== question.authorID.toString()) {
+    if (authorId !== question.authorId.toString()) {
       return left(new NotAllowedError())
     }
 
     const currentQuestionAttachments =
-      await this.questionAttachmentsRepository.findManyByQuestionID(questionID)
+      await this.questionAttachmentsRepository.findManyByQuestionId(questionId)
 
     const questionAttachmentList = new QuestionAttachmentList(
       currentQuestionAttachments,
     )
 
-    const questionAttachments = attachmentsIDs.map((attachmentsID) => {
+    const questionAttachments = attachmentsIds.map((attachmentsId) => {
       return QuestionAttachment.create({
-        attachmentID: new UniqueEntityID(attachmentsID),
-        questionID: question.id,
+        attachmentId: new UniqueEntityId(attachmentsId),
+        questionId: question.id,
       })
     })
 

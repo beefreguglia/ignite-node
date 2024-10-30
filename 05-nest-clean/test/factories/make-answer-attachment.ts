@@ -1,6 +1,6 @@
 import { faker } from '@faker-js/faker'
 
-import { UniqueEntityID } from '../../src/core/entities/unique-entity-id'
+import { UniqueEntityId } from '../../src/core/entities/unique-entity-id'
 import {
   AnswerAttachment,
   AnswerAttachmentProps,
@@ -8,12 +8,12 @@ import {
 
 export function makeAnswerAttachment(
   override?: Partial<AnswerAttachmentProps>,
-  id?: UniqueEntityID,
+  id?: UniqueEntityId,
 ) {
   const answerAttachment = AnswerAttachment.create(
     {
-      answerID: new UniqueEntityID(faker.string.uuid()),
-      attachmentID: new UniqueEntityID(faker.string.uuid()),
+      answerId: new UniqueEntityId(faker.string.uuid()),
+      attachmentId: new UniqueEntityId(faker.string.uuid()),
       ...override,
     },
     id,

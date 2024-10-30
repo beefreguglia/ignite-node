@@ -1,7 +1,7 @@
 import { describe, expect, it, beforeEach } from 'vitest'
 import { InMemoryAnswersRepository } from '@/../test/repositories/in-memory-answers-repository'
 import { DeleteAnswerUseCase } from './delete-answer'
-import { UniqueEntityID } from '../../../../core/entities/unique-entity-id'
+import { UniqueEntityId } from '../../../../core/entities/unique-entity-id'
 import { makeAnswer } from '@/../test/factories/make-answer'
 import { NotAllowedError } from '../../../../core/errors/errors/not-allowed-error'
 import { InMemoryAnswerAttachmentsRepository } from '@/../test/repositories/in-memory-answer-attachments-repository'
@@ -24,27 +24,27 @@ describe('Delete answer', () => {
   it('should be able to delete a answer by id', async () => {
     const answer = makeAnswer(
       {
-        authorID: new UniqueEntityID('author-1'),
+        authorId: new UniqueEntityId('author-1'),
       },
-      new UniqueEntityID('answer-1'),
+      new UniqueEntityId('answer-1'),
     )
 
     await inMemoryAnswersRepository.create(answer)
 
     inMemoryAnswersAttachmentsRepository.items.push(
       makeAnswerAttachment({
-        answerID: answer.id,
-        attachmentID: new UniqueEntityID('1'),
+        answerId: answer.id,
+        attachmentId: new UniqueEntityId('1'),
       }),
       makeAnswerAttachment({
-        answerID: answer.id,
-        attachmentID: new UniqueEntityID('2'),
+        answerId: answer.id,
+        attachmentId: new UniqueEntityId('2'),
       }),
     )
 
     const result = await sut.execute({
-      answerID: 'answer-1',
-      authorID: 'author-1',
+      answerId: 'answer-1',
+      authorId: 'author-1',
     })
 
     expect(result.isRight()).toBe(true)
@@ -55,15 +55,15 @@ describe('Delete answer', () => {
   it('should not be able to delete a answer from another user', async () => {
     const answer = makeAnswer(
       {
-        authorID: new UniqueEntityID('author-1'),
+        authorId: new UniqueEntityId('author-1'),
       },
-      new UniqueEntityID('answer-1'),
+      new UniqueEntityId('answer-1'),
     )
 
     await inMemoryAnswersRepository.create(answer)
     const result = await sut.execute({
-      answerID: 'answer-1',
-      authorID: 'author-2',
+      answerId: 'answer-1',
+      authorId: 'author-2',
     })
 
     expect(result.isLeft()).toBe(true)

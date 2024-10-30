@@ -2,8 +2,8 @@ import { PaginationParams } from '../../../../core/repositories/pagination-param
 import { QuestionComment } from '../../enterprise/entities/question-comments'
 
 export interface QuestionCommentsRepository {
-  findByID(id: string): Promise<QuestionComment | null>
-  findManyByQuestionID(
+  findById(id: string): Promise<QuestionComment | null>
+  findManyByQuestionId(
     id: string,
     params: PaginationParams,
   ): Promise<QuestionComment[]>

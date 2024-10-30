@@ -9,7 +9,7 @@ import { z } from 'zod'
 
 import { UserPayload } from '@/infra/auth/jwt.strategy'
 import { JwtAuthGuard } from '@/infra/auth/jwt-auth.guard'
-import { PrismaService } from '@/infra/prisma/prisma.service'
+import { PrismaService } from '@/infra/database/prisma/prisma.service'
 import { CurrentUser } from '@/infra/auth/current-user.decorator'
 import { ZodValidationPipe } from '@/infra/http/pipes/zod-validation.pipe'
 

@@ -3,7 +3,7 @@ import { AnswerComment } from '../../enterprise/entities/answer-comments'
 import { AnswerCommentsRepository } from '../repositories/answer-comments-repository'
 
 interface FetchAnswerCommentsUseCaseRequest {
-  answerID: string
+  answerId: string
   page: number
 }
 
@@ -18,11 +18,11 @@ export class FetchAnswerCommentsUseCase {
   constructor(private answerCommentsRepository: AnswerCommentsRepository) {}
 
   async execute({
-    answerID,
+    answerId,
     page,
   }: FetchAnswerCommentsUseCaseRequest): Promise<FetchAnswerCommentsUseCaseResponse> {
     const answerComments =
-      await this.answerCommentsRepository.findManyByAnswerID(answerID, { page })
+      await this.answerCommentsRepository.findManyByAnswerId(answerId, { page })
 
     return right({ answerComments })
   }

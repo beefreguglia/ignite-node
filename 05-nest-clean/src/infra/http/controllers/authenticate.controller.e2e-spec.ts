@@ -4,7 +4,7 @@ import { Test } from '@nestjs/testing'
 import { INestApplication } from '@nestjs/common'
 
 import { AppModule } from '@/infra/app.module'
-import { PrismaService } from '@/infra/prisma/prisma.service'
+import { PrismaService } from '@/infra/database/prisma/prisma.service'
 
 describe('Authenticate (E2E)', () => {
   let app: INestApplication

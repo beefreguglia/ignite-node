@@ -1,15 +1,15 @@
 import dayjs from 'dayjs'
 
 import { Slug } from './value-objects/slug'
-import { UniqueEntityID } from '../../../../core/entities/unique-entity-id'
+import { UniqueEntityId } from '../../../../core/entities/unique-entity-id'
 import { Optional } from '../../../../core/types/optional'
 import { AggregateRoot } from '../../../../core/entities/aggregate-root'
 import { QuestionAttachmentList } from './question-attachment-list'
 import { QuestionBestAnswerChosenEvent } from '../events/question-best-answer-chosen-event'
 
 export interface QuestionProps {
-  authorID: UniqueEntityID
-  bestAnswerID?: UniqueEntityID
+  authorId: UniqueEntityId
+  bestAnswerId?: UniqueEntityId
   title: string
   content: string
   slug: Slug
@@ -19,12 +19,12 @@ export interface QuestionProps {
 }
 
 export class Question extends AggregateRoot<QuestionProps> {
-  get authorID() {
-    return this.props.authorID
+  get authorId() {
+    return this.props.authorId
   }
 
-  get bestAnswerID() {
-    return this.props.bestAnswerID
+  get bestAnswerId() {
+    return this.props.bestAnswerId
   }
 
   get title() {
@@ -75,25 +75,25 @@ export class Question extends AggregateRoot<QuestionProps> {
     this.touch()
   }
 
-  set bestAnswerID(bestAnswerID: UniqueEntityID | undefined) {
-    if (bestAnswerID === undefined) {
+  set bestAnswerId(bestAnswerId: UniqueEntityId | undefined) {
+    if (bestAnswerId === undefined) {
       return
     }
 
     if (
-      this.props.bestAnswerID === undefined ||
-      !this.props.bestAnswerID.equals(bestAnswerID)
+      this.props.bestAnswerId === undefined ||
+      !this.props.bestAnswerId.equals(bestAnswerId)
     ) {
-      this.addDomainEvent(new QuestionBestAnswerChosenEvent(this, bestAnswerID))
+      this.addDomainEvent(new QuestionBestAnswerChosenEvent(this, bestAnswerId))
     }
 
-    this.props.bestAnswerID = bestAnswerID
+    this.props.bestAnswerId = bestAnswerId
     this.touch()
   }
 
   static create(
     props: Optional<QuestionProps, 'createdAt' | 'slug' | 'attachments'>,
-    id?: UniqueEntityID,
+    id?: UniqueEntityId,
   ) {
     const question = new Question(
       {

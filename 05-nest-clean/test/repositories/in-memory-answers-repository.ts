@@ -11,7 +11,7 @@ export class InMemoryAnswersRepository implements AnswersRepository {
     private answerAttachmentsRepository: AnswerAttachmentsRepository,
   ) {}
 
-  async findByID(id: string): Promise<Answer | null> {
+  async findById(id: string): Promise<Answer | null> {
     const answer = this.items.find((item) => item.id.toString() === id)
 
     if (!answer) {
@@ -21,12 +21,12 @@ export class InMemoryAnswersRepository implements AnswersRepository {
     return answer
   }
 
-  async findManyByQuestionID(
-    questionID: string,
+  async findManyByQuestionId(
+    questionId: string,
     { page }: PaginationParams,
   ): Promise<Answer[]> {
     const answers = this.items
-      .filter((item) => item.questionID.toString() === questionID)
+      .filter((item) => item.questionId.toString() === questionId)
       .slice((page - 1) * 20, page * 20)
 
     return answers
@@ -52,6 +52,6 @@ export class InMemoryAnswersRepository implements AnswersRepository {
     const itemIndex = this.items.findIndex((item) => item.id === answer.id)
     this.items.splice(itemIndex, 1)
 
-    this.answerAttachmentsRepository.deleteManyByAnswerID(answer.id.toString())
+    this.answerAttachmentsRepository.deleteManyByAnswerId(answer.id.toString())
   }
 }

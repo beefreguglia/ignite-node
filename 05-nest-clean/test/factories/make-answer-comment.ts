@@ -1,6 +1,6 @@
 import { faker } from '@faker-js/faker'
 
-import { UniqueEntityID } from '../../src/core/entities/unique-entity-id'
+import { UniqueEntityId } from '../../src/core/entities/unique-entity-id'
 import {
   AnswerComment,
   AnswerCommentProps,
@@ -8,12 +8,12 @@ import {
 
 export function makeAnswerComment(
   override?: Partial<AnswerCommentProps>,
-  id?: UniqueEntityID,
+  id?: UniqueEntityId,
 ) {
   const answerComment = AnswerComment.create(
     {
-      authorID: new UniqueEntityID(faker.string.uuid()),
-      answerID: new UniqueEntityID(faker.string.uuid()),
+      authorId: new UniqueEntityId(faker.string.uuid()),
+      answerId: new UniqueEntityId(faker.string.uuid()),
       content: faker.lorem.text(),
       ...override,
     },

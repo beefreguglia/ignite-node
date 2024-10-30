@@ -2,8 +2,8 @@ import { PaginationParams } from '../../../../core/repositories/pagination-param
 import { AnswerComment } from '../../enterprise/entities/answer-comments'
 
 export interface AnswerCommentsRepository {
-  findByID(id: string): Promise<AnswerComment | null>
-  findManyByAnswerID(
+  findById(id: string): Promise<AnswerComment | null>
+  findManyByAnswerId(
     id: string,
     params: PaginationParams,
   ): Promise<AnswerComment[]>

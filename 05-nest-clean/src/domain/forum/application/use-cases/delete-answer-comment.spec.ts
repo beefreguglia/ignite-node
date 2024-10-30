@@ -2,7 +2,7 @@ import { describe, expect, it, beforeEach } from 'vitest'
 import { InMemoryAnswerCommentsRepository } from '@/../test/repositories/in-memory-answer-comments-repository'
 import { DeleteAnswerCommentUseCase } from './delete-answer-comment'
 import { makeAnswerComment } from '@/../test/factories/make-answer-comment'
-import { UniqueEntityID } from '../../../../core/entities/unique-entity-id'
+import { UniqueEntityId } from '../../../../core/entities/unique-entity-id'
 import { NotAllowedError } from '../../../../core/errors/errors/not-allowed-error'
 
 let inMemoryAnswerCommentsRepository: InMemoryAnswerCommentsRepository
@@ -21,8 +21,8 @@ describe('Delete a answer comment', () => {
     await inMemoryAnswerCommentsRepository.create(answerComment)
 
     const result = await sut.execute({
-      answerCommentID: answerComment.id.toString(),
-      authorID: answerComment.authorID.toString(),
+      answerCommentId: answerComment.id.toString(),
+      authorId: answerComment.authorId.toString(),
     })
 
     expect(result.isRight()).toBe(true)
@@ -31,13 +31,13 @@ describe('Delete a answer comment', () => {
 
   it('should not be able to delete another user answer comment', async () => {
     const answerComment = makeAnswerComment({
-      authorID: new UniqueEntityID('author-1'),
+      authorId: new UniqueEntityId('author-1'),
     })
 
     await inMemoryAnswerCommentsRepository.create(answerComment)
     const result = await sut.execute({
-      answerCommentID: answerComment.id.toString(),
-      authorID: 'author-2',
+      answerCommentId: answerComment.id.toString(),
+      authorId: 'author-2',
     })
 
     expect(result.isLeft()).toBe(true)

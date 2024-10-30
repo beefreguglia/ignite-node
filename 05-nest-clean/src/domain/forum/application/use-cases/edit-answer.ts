@@ -1,5 +1,5 @@
 import { Either, left, right } from '../../../../core/either'
-import { UniqueEntityID } from '../../../../core/entities/unique-entity-id'
+import { UniqueEntityId } from '../../../../core/entities/unique-entity-id'
 import { Answer } from '../../enterprise/entities/answer'
 import { AnswerAttachment } from '../../enterprise/entities/answer-attachment'
 import { AnswerAttachmentList } from '../../enterprise/entities/answer-attachment-list'
@@ -9,10 +9,10 @@ import { NotAllowedError } from '../../../../core/errors/errors/not-allowed-erro
 import { ResourceNotFoundError } from '../../../../core/errors/errors/resource-not-found-error'
 
 interface EditAnswerUseCaseRequest {
-  authorID: string
-  answerID: string
+  authorId: string
+  answerId: string
   content: string
-  attachmentsIDs: string[]
+  attachmentsIds: string[]
 }
 
 type EditAnswerUseCaseResponse = Either<
@@ -29,32 +29,32 @@ export class EditAnswerUseCase {
   ) {}
 
   async execute({
-    authorID,
-    answerID,
+    authorId,
+    answerId,
     content,
-    attachmentsIDs,
+    attachmentsIds,
   }: EditAnswerUseCaseRequest): Promise<EditAnswerUseCaseResponse> {
-    const answer = await this.answersRepository.findByID(answerID)
+    const answer = await this.answersRepository.findById(answerId)
 
     if (!answer) {
       return left(new ResourceNotFoundError())
     }
 
-    if (authorID !== answer.authorID.toString()) {
+    if (authorId !== answer.authorId.toString()) {
       return left(new NotAllowedError())
     }
 
     const currentAnswerAttachments =
-      await this.answerAttachmentsRepository.findManyByAnswerID(answerID)
+      await this.answerAttachmentsRepository.findManyByAnswerId(answerId)
 
     const answerAttachmentList = new AnswerAttachmentList(
       currentAnswerAttachments,
     )
 
-    const answerAttachments = attachmentsIDs.map((attachmentsID) => {
+    const answerAttachments = attachmentsIds.map((attachmentsId) => {
       return AnswerAttachment.create({
-        attachmentID: new UniqueEntityID(attachmentsID),
-        answerID: answer.id,
+        attachmentId: new UniqueEntityId(attachmentsId),
+        answerId: answer.id,
       })
     })
 

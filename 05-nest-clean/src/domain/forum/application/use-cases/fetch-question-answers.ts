@@ -3,7 +3,7 @@ import { Answer } from '../../enterprise/entities/answer'
 import { AnswersRepository } from '../repositories/answers-repository'
 
 interface FetchQuestionAnswersUseCaseRequest {
-  questionID: string
+  questionId: string
   page: number
 }
 
@@ -18,11 +18,11 @@ export class FetchQuestionAnswersUseCase {
   constructor(private answersRepository: AnswersRepository) {}
 
   async execute({
-    questionID,
+    questionId,
     page,
   }: FetchQuestionAnswersUseCaseRequest): Promise<FetchQuestionAnswersUseCaseResponse> {
-    const answers = await this.answersRepository.findManyByQuestionID(
-      questionID,
+    const answers = await this.answersRepository.findManyByQuestionId(
+      questionId,
       { page },
     )
 

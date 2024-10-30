@@ -51,12 +51,12 @@ describe('On question best answer', () => {
 
   it('should send a notification when a question has new best answer chosen', async () => {
     const question = makeQuestion()
-    const answer = makeAnswer({ questionID: question.id })
+    const answer = makeAnswer({ questionId: question.id })
 
     await inMemoryQuestionsRepository.create(question)
     await inMemoryAnswersRepository.create(answer)
 
-    question.bestAnswerID = answer.id
+    question.bestAnswerId = answer.id
 
     inMemoryQuestionsRepository.save(question)
 

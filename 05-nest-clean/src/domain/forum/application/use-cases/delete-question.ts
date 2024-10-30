@@ -4,8 +4,8 @@ import { NotAllowedError } from '../../../../core/errors/errors/not-allowed-erro
 import { ResourceNotFoundError } from '../../../../core/errors/errors/resource-not-found-error'
 
 interface DeleteQuestionUseCaseRequest {
-  authorID: string
-  questionID: string
+  authorId: string
+  questionId: string
 }
 
 type DeleteQuestionUseCaseResponse = Either<
@@ -17,16 +17,16 @@ export class DeleteQuestionUseCase {
   constructor(private questionsRepository: QuestionsRepository) {}
 
   async execute({
-    authorID,
-    questionID,
+    authorId,
+    questionId,
   }: DeleteQuestionUseCaseRequest): Promise<DeleteQuestionUseCaseResponse> {
-    const question = await this.questionsRepository.findByID(questionID)
+    const question = await this.questionsRepository.findById(questionId)
 
     if (!question) {
       return left(new ResourceNotFoundError())
     }
 
-    if (authorID !== question.authorID.toString()) {
+    if (authorId !== question.authorId.toString()) {
       return left(new NotAllowedError())
     }
 

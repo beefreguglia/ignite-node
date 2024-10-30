@@ -23,13 +23,13 @@ export class OnQuestionBestAnswerChosen implements EventHandler {
     question,
     bestAnswerId,
   }: QuestionBestAnswerChosenEvent) {
-    const answer = await this.answersRepository.findByID(
+    const answer = await this.answersRepository.findById(
       bestAnswerId.toString(),
     )
 
     if (answer) {
       await this.sendNotificationUseCase.execute({
-        recipientID: question.authorID.toString(),
+        recipientId: question.authorId.toString(),
         title: 'Sua Resposta foi escolhida!',
         content: `A resposta que você enviou em "${question.title
           .substring(0, 20)
