@@ -5,8 +5,8 @@ import { Notification } from '../../enterprise/entities/notification'
 import { NotificationsRepository } from '../repositories/notifications-repository'
 
 interface ReadNotificationUseCaseRequest {
-  recipientID: string
-  notificationID: string
+  recipientId: string
+  notificationId: string
 }
 
 type ReadNotificationUseCaseResponse = Either<
@@ -20,17 +20,17 @@ export class ReadNotificationUseCase {
   constructor(private notificationsRepository: NotificationsRepository) {}
 
   async execute({
-    notificationID,
-    recipientID,
+    notificationId,
+    recipientId,
   }: ReadNotificationUseCaseRequest): Promise<ReadNotificationUseCaseResponse> {
     const notification =
-      await this.notificationsRepository.findById(notificationID)
+      await this.notificationsRepository.findById(notificationId)
 
     if (!notification) {
       return left(new ResourceNotFoundError())
     }
 
-    if (recipientID !== notification.recipientID.toString()) {
+    if (recipientId !== notification.recipientId.toString()) {
       return left(new NotAllowedError())
     }
 

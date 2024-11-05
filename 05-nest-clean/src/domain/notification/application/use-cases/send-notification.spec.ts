@@ -14,7 +14,7 @@ describe('Send notification', () => {
 
   it('should be able to create a notification', async () => {
     const result = await sut.execute({
-      recipientID: '1',
+      recipientId: '1',
       title: 'New notification',
       content: 'Notification content',
     })

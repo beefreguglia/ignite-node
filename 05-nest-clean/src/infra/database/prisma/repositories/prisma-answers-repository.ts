@@ -5,7 +5,7 @@ import { AnswersRepository } from '@/domain/forum/application/repositories/answe
 import { Answer } from '@/domain/forum/enterprise/entities/answer'
 
 @Injectable()
-class PrismaAnswerRepository implements AnswersRepository {
+export class PrismaAnswersRepository implements AnswersRepository {
   findById(id: string): Promise<Answer | null> {
     throw new Error('Method not implemented.')
   }

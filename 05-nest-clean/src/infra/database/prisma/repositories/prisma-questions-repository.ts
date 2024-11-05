@@ -7,7 +7,7 @@ import { PrismaService } from '../prisma.service'
 import { PrismaQuestionMapper } from '../mappers/prisma-question-mapper'
 
 @Injectable()
-export class PrismaQuestionRepository implements QuestionsRepository {
+export class PrismaQuestionsRepository implements QuestionsRepository {
   constructor(private prisma: PrismaService) {}
 
   async findById(id: string): Promise<Question | null> {
@@ -52,7 +52,6 @@ export class PrismaQuestionRepository implements QuestionsRepository {
 
   async create(question: Question): Promise<void> {
     const data = PrismaQuestionMapper.toPrisma(question)
-
     await this.prisma.question.create({
       data,
     })

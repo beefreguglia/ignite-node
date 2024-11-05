@@ -26,10 +26,10 @@ export class PrismaQuestionMapper {
     return {
       id: question.id.toString(),
       authorId: question.authorId.toString(),
+      title: question.title,
+      bestAnswerId: question.bestAnswerId?.toString(),
       content: question.content,
       slug: question.slug.value,
-      title: question.title,
-      bestAnswerId: question.bestAnswerId.toString(),
       createdAt: question.createdAt,
       updatedAt: question.updatedAt,
     }
