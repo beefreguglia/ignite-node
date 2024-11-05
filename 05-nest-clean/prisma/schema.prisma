@@ -58,11 +58,12 @@ model Answer {
   authorId   String @map("author_id")
   questionId String @map("question_id")
 
-  author       User         @relation(fields: [authorId], references: [id])
-  bestAnswerOn Question?    @relation("bestAnswer")
-  question     Question     @relation(fields: [questionId], references: [id])
-  comments     Comment[]
-  attachments  Attachment[]
+  author       User      @relation(fields: [authorId], references: [id])
+  bestAnswerOn Question? @relation("bestAnswer")
+  question     Question  @relation(fields: [questionId], references: [id])
+
+  comments    Comment[]
+  attachments Attachment[]
 
   @@map("answers")
 }
