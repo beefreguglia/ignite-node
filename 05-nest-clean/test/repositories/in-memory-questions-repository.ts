@@ -45,14 +45,12 @@ export class InMemoryQuestionsRepository implements QuestionsRepository {
     DomainEvents.dispatchEventsForAggregate(question.id)
   }
 
-  async save(question: Question): Promise<Question> {
+  async save(question: Question): Promise<void> {
     const itemIndex = this.items.findIndex((item) => item.id === question.id)
 
     this.items[itemIndex] = question
 
     DomainEvents.dispatchEventsForAggregate(question.id)
-
-    return question
   }
 
   async delete(question: Question): Promise<void> {
