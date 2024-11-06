@@ -3,7 +3,9 @@ import { PaginationParams } from '@/core/repositories/pagination-params'
 import { QuestionComment } from '@/domain/forum/enterprise/entities/question-comment'
 import { QuestionCommentsRepository } from '@/domain/forum/application/repositories/question-comments-repository'
 import { PrismaQuestionCommentMapper } from '../mappers/prisma-question-comment-mapper'
+import { Injectable } from '@nestjs/common'
 
+@Injectable()
 export class PrismaQuestionCommentsRepository
   implements QuestionCommentsRepository
 {
