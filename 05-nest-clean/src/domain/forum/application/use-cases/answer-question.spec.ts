@@ -4,12 +4,14 @@ import { AnswerQuestionUseCase } from './answer-question'
 import { InMemoryAnswersRepository } from '@/../test/repositories/in-memory-answers-repository'
 import { UniqueEntityId } from '../../../../core/entities/unique-entity-id'
 import { InMemoryAnswerAttachmentsRepository } from '@/../test/repositories/in-memory-answer-attachments-repository'
+import { makeAnswer } from 'test/factories/make-answer'
+import { makeAnswerAttachment } from 'test/factories/make-answer-attachment'
 
 let inMemoryAnswersAttachmentsRepository: InMemoryAnswerAttachmentsRepository
 let inMemoryAnswersRepository: InMemoryAnswersRepository
 let sut: AnswerQuestionUseCase // System under test
 
-describe('Create question', () => {
+describe('Answer a question', () => {
   beforeEach(() => {
     inMemoryAnswersAttachmentsRepository =
       new InMemoryAnswerAttachmentsRepository()
@@ -37,6 +39,28 @@ describe('Create question', () => {
         expect.objectContaining({ attachmentId: new UniqueEntityId('1') }),
         expect.objectContaining({ attachmentId: new UniqueEntityId('2') }),
       ],
+    )
+  })
+
+  it('should persist attachments when creating an answer', async () => {
+    const result = await sut.execute({
+      authorId: '1',
+      questionId: '1',
+      content: 'answer content',
+      attachmentsIds: ['1', '2'],
+    })
+
+    expect(result.isRight()).toBe(true)
+    expect(inMemoryAnswersAttachmentsRepository.items).toHaveLength(2)
+    expect(inMemoryAnswersAttachmentsRepository.items).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          attachmentId: new UniqueEntityId('1'),
+        }),
+        expect.objectContaining({
+          attachmentId: new UniqueEntityId('2'),
+        }),
+      ]),
     )
   })
 })

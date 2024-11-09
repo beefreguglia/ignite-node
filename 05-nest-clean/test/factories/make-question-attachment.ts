@@ -1,21 +1,20 @@
-import { faker } from '@faker-js/faker'
+import { UniqueEntityId } from '@/core/entities/unique-entity-id'
 
-import { UniqueEntityId } from '../../src/core/entities/unique-entity-id'
 import {
   QuestionAttachment,
   QuestionAttachmentProps,
-} from '../../src/domain/forum/enterprise/entities/question-attachment'
-import { Injectable } from '@nestjs/common'
+} from '@/domain/forum/enterprise/entities/question-attachment'
 import { PrismaService } from '@/infra/database/prisma/prisma.service'
+import { Injectable } from '@nestjs/common'
 
 export function makeQuestionAttachment(
-  override?: Partial<QuestionAttachmentProps>,
+  override: Partial<QuestionAttachmentProps> = {},
   id?: UniqueEntityId,
 ) {
   const questionAttachment = QuestionAttachment.create(
     {
-      questionId: new UniqueEntityId(faker.string.uuid()),
-      attachmentId: new UniqueEntityId(faker.string.uuid()),
+      questionId: new UniqueEntityId(),
+      attachmentId: new UniqueEntityId(),
       ...override,
     },
     id,
